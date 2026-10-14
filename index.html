@@ -35,6 +35,7 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px
 <div class="field"><label>Tipo de imóvel <span class="required">*</span></label><select id="tipo" required><option value="">Selecione</option><option>Apartamento</option><option>Cobertura</option><option>Casa</option><option>Casa em condomínio</option><option>Terreno</option><option>Comercial</option><option>Outro</option></select></div>
 <div class="field"><label>Endereço completo <span class="required">*</span></label><input id="endereco" required autocomplete="street-address" placeholder="Rua, número e complemento"></div>
 <div class="grid"><div class="field"><label>Bairro</label><input id="bairro"></div><div class="field"><label>Cidade <span class="required">*</span></label><input id="cidade" required autocomplete="address-level2"></div></div>
+<div class="field" style="margin-top:18px"><label>Ponto de referência importante</label><input id="referencia" placeholder="Ex.: praia, avenida, shopping, parque..."></div>
 <div class="grid"><div class="field"><label>Valor de venda</label><input id="valor" inputmode="numeric" placeholder="R$ 0"></div><div class="field"><label>Área aproximada</label><input id="area" inputmode="decimal" placeholder="Ex.: 120 m²"></div></div>
 
 <div class="grid"><div class="field"><label>Quartos</label><input id="quartos" inputmode="numeric" placeholder="Ex.: 3"></div><div class="field"><label>Suítes</label><input id="suites" inputmode="numeric" placeholder="Ex.: 2"></div><div class="field"><label>Banheiros</label><input id="banheiros" inputmode="numeric" placeholder="Ex.: 3"></div><div class="field"><label>Vagas</label><input id="vagas" inputmode="numeric" placeholder="Ex.: 2"></div></div>
@@ -44,13 +45,14 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px
 <section class="step"><h2 class="step-title">3. Apresentação, drone e vídeo</h2><p class="step-help">Marque o que devemos mostrar e informe restrições ou objetivos para a gravação.</p>
 <div class="options">
 <div class="option"><input type="checkbox" id="show_0" value="O imóvel"><label for="show_0">O imóvel</label></div><div class="option"><input type="checkbox" id="show_1" value="Vista"><label for="show_1">Vista</label></div><div class="option"><input type="checkbox" id="show_2" value="Praia / mar"><label for="show_2">Praia / mar</label></div><div class="option"><input type="checkbox" id="show_3" value="Condomínio"><label for="show_3">Condomínio</label></div><div class="option"><input type="checkbox" id="show_4" value="Área de lazer"><label for="show_4">Área de lazer</label></div><div class="option"><input type="checkbox" id="show_5" value="Localização"><label for="show_5">Localização</label></div><div class="option"><input type="checkbox" id="show_6" value="Bairro"><label for="show_6">Bairro</label></div><div class="option"><input type="checkbox" id="show_7" value="Comércio próximo"><label for="show_7">Comércio próximo</label></div><div class="option"><input type="checkbox" id="show_8" value="Vias de acesso"><label for="show_8">Vias de acesso</label></div>
-</div><div class="field" style="margin-top:18px"><label>Ponto de referência importante</label><input id="referencia" placeholder="Ex.: praia, avenida, shopping, parque..."></div>
+</div>
 
+<div class="field"><label>Tem algo indispensável que devemos mostrar?</label><textarea id="indispensavel" placeholder="Opcional"></textarea></div>
 <div class="field"><label>Existe alguma restrição para voo ou gravação?</label><textarea id="restricoes" placeholder="Ex.: não mostrar determinada área, vizinho, placa, interior de outro imóvel..."></textarea></div>
 <div class="field"><label>Objetivo do vídeo</label><div class="options">
 <div class="option"><input type="checkbox" id="obj_0" value="Anúncio do imóvel"><label for="obj_0">Anúncio do imóvel</label></div><div class="option"><input type="checkbox" id="obj_1" value="Instagram / Reels"><label for="obj_1">Instagram / Reels</label></div><div class="option"><input type="checkbox" id="obj_2" value="YouTube"><label for="obj_2">YouTube</label></div><div class="option"><input type="checkbox" id="obj_3" value="Anúncio patrocinado"><label for="obj_3">Anúncio patrocinado</label></div><div class="option"><input type="checkbox" id="obj_4" value="Enviar para cliente"><label for="obj_4">Enviar para cliente</label></div><div class="option"><input type="checkbox" id="obj_5" value="Outro"><label for="obj_5">Outro</label></div>
 </div></div>
-<div class="field"><label>Tem algo indispensável que devemos mostrar?</label><textarea id="indispensavel" placeholder="Opcional"></textarea></div>
+
 
 <div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="submit" class="submit" id="submit">ENVIAR BRIEFING</button></div><div class="error" id="error"></div></section>
 
