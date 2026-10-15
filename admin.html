@@ -20,6 +20,23 @@ button{border:0;border-radius:11px;padding:12px 16px;font:inherit;font-weight:75
 .modal{position:fixed;inset:0;background:rgba(8,20,40,.5);display:none;align-items:center;justify-content:center;padding:15px;z-index:20}.modal.show{display:flex}.modal-box{background:#fff;border-radius:20px;width:min(760px,100%);max-height:90vh;overflow:auto;padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-top:13px}.full{grid-column:1/-1}.json{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;min-height:220px}
 .small{font-size:11px;color:var(--muted);margin-top:12px;text-align:center}
 @media(max-width:650px){.toolbar{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start}.top button{white-space:nowrap}}
+
+/* Formatação exclusiva da visualização de detalhes */
+.details-box{width:min(820px,100%);max-height:90vh;overflow:auto;padding:24px}
+.details-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.details-heading h2{margin:0;color:var(--blue);font-size:23px}
+.details-heading p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.details-section{margin:18px 0}
+.details-section h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin:0 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+.details-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.details-field{min-width:0;padding:12px 13px;background:#f7f9fc;border:1px solid #e8edf4;border-radius:11px}
+.details-field.full{grid-column:1/-1}
+.details-label{display:block;font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.035em;color:var(--muted);margin-bottom:5px}
+.details-value{font-size:14px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text)}
+.details-chip{display:inline-block;margin:2px 4px 2px 0;padding:5px 9px;border-radius:7px;background:#eaf0f8;color:var(--blue);font-size:12px;font-weight:650}
+.details-price{font-size:20px;font-weight:800;color:var(--green)}
+@media(max-width:560px){.details-box{padding:16px}.details-grid{grid-template-columns:1fr}.details-field.full{grid-column:auto}.details-heading h2{font-size:20px}}
+
 </style>
 
 <style id="last-update-style">.last-update{width:100%;text-align:center;font-size:10px;line-height:1.3;color:#8a8f98;margin:18px 0 10px;padding:0 12px;font-weight:400}</style>
@@ -53,6 +70,14 @@ button{border:0;border-radius:11px;padding:12px 16px;font:inherit;font-weight:75
       <div id="list" class="list"><div class="empty">Carregando...</div></div>
     </div>
   </main></div>
+
+<div id="detailsModal" class="modal" onclick="if(event.target===this)closeDetails()">
+ <div class="modal-box details-box">
+  <div class="details-heading"><div><h2 id="detailsTitle">Detalhes do briefing</h2><p id="detailsSubtitle">Informações enviadas no formulário</p></div><button class="light" onclick="closeDetails()">Fechar</button></div>
+  <div id="detailsContent"></div>
+  <div class="actions" style="justify-content:flex-end"><button class="light" onclick="closeDetails()">Fechar detalhes</button></div>
+ </div>
+</div>
 
 <div id="modal" class="modal">
  <div class="modal-box">
@@ -191,8 +216,57 @@ async function removeRow(id){
 }
 window.removeRow=removeRow;
 
-function details(id){const r=findRow(id);if(r)alert(JSON.stringify(r,null,2))}
-window.details=details;
+function details(id){
+  const r=findRow(id);if(!r)return;
+  const root=document.getElementById("detailsContent");
+  document.getElementById("detailsTitle").textContent=r.nome_corretor||"Detalhes do briefing";
+  document.getElementById("detailsSubtitle").textContent="Briefing #"+text(r.id)+" • Recebido em "+formatDate(r.created_at);
+  const field=(label,value,full=false,extraClass="")=>'<div class="details-field'+(full?' full':'')+'"><span class="details-label">'+escapeHtml(label)+'</span><div class="details-value '+extraClass+'">'+value+'</div></div>';
+  const val=(v)=>escapeHtml(text(v));
+  const section=(title,fields)=>'<section class="details-section"><h3>'+escapeHtml(title)+'</h3><div class="details-grid">'+fields.join("")+'</div></section>';
+  const d=r.respostas&&typeof r.respostas==="object"?r.respostas:{};
+  const listVal=(v)=>Array.isArray(v)&&v.length?v.map(x=>'<span class="details-chip">'+escapeHtml(x)+'</span>').join(""):val(v);
+  const base=[
+    field("Nome",val(r.nome_corretor)),
+    field("WhatsApp",val(r.whatsapp)),
+    field("Finalidade",val(d.finalidade)),
+    field("Tipo de imóvel",val(r.tipo_imovel)),
+    field("Endereço",val(r.endereco),true),
+    field("Bairro",val(r.bairro)),
+    field("Cidade",val(r.cidade)),
+    field("Ponto de referência",val(d.referencia),true),
+    field("Valor de venda",val(d.valor_venda_formatado||r.valor_venda)),
+    field("Área",val(d.area)),
+    field("Quartos",val(d.quartos)),
+    field("Suítes",val(d.suites)),
+    field("Banheiros",val(d.banheiros)),
+    field("Vagas",val(d.vagas)),
+    field("Diferenciais do imóvel",val(d.diferenciais),true)
+  ];
+  const production=[
+    field("O que mostrar",listVal(d.itens_mostrar),true),
+    field("O que é indispensável",val(d.indispensavel),true),
+    field("Restrições de voo/gravação",val(d.restricoes),true),
+    field("Objetivos do vídeo",listVal(d.objetivos_video),true)
+  ];
+  const proposal=[
+    field("Pacote escolhido",val(d.pacote_escolhido),true),
+    field("Urgência",d.urgencia?'<span class="details-chip">Entrega prioritária</span>':'Não',false),
+    field("Valor da proposta",d.valor_proposta!=null?'<span class="details-price">R$ '+Number(d.valor_proposta).toLocaleString("pt-BR")+'</span>':"—")
+  ];
+  let extra=[];
+  const known=new Set(["nome_corretor","whatsapp","finalidade","tipo_imovel","endereco","bairro","cidade","referencia","valor_venda_formatado","area","quartos","suites","banheiros","vagas","diferenciais","itens_mostrar","indispensavel","restricoes","objetivos_video","pacote_escolhido","urgencia","valor_proposta"]);
+  for(const [key,value] of Object.entries(d)){
+    if(known.has(key)||value==null||value==="")continue;
+    const label=key.replace(/_/g," ").replace(/^./,c=>c.toUpperCase());
+    const rendered=Array.isArray(value)?listVal(value):typeof value==="object"?'<pre style="white-space:pre-wrap;overflow-wrap:anywhere;margin:0">'+escapeHtml(JSON.stringify(value,null,2))+'</pre>':val(value);
+    extra.push(field(label,rendered,true));
+  }
+  root.innerHTML=section("Contato e imóvel",base)+section("Captação e conteúdo",production)+section("Pacote e proposta",proposal)+(extra.length?section("Outras respostas",extra):"");
+  document.getElementById("detailsModal").classList.add("show");
+}
+function closeDetails(){document.getElementById("detailsModal").classList.remove("show")}
+window.details=details;window.closeDetails=closeDetails;
 function showMsg(s,error=false){document.getElementById("message").innerHTML='<div class="'+(error?"error":"notice")+'">'+escapeHtml(s)+"</div>";setTimeout(()=>document.getElementById("message").innerHTML="",4000)}
 function exportCSV(){
   if(!rows.length)return;
