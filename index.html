@@ -54,8 +54,19 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px
 </div></div>
 
 
-<div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="submit" class="submit" id="submit">ENVIAR BRIEFING</button></div><div class="error" id="error"></div></section>
+<div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="button" class="next" onclick="nextStep()">Continuar →</button></div><div class="error" id="error"></div></section>
 
+<section class="step" data-real-estate-only="true"><h2 class="step-title">4. Escolha seu pacote e finalize a proposta</h2><p class="step-help">Escolha a opção que melhor atende à sua necessidade. Nos pacotes com mais de um vídeo, cada vídeo pode ter uma proposta diferente: por exemplo, um com o corretor apresentando e falando, outro destacando apenas o imóvel e outro com foco no condomínio.</p>
+<div class="field"><label>Pacote desejado <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Pacote de vídeos">
+<div class="option"><input type="radio" id="pacote_1min" name="pacote" value="Vídeo avulso — 1 vídeo de até 1 min" data-price="250"><label for="pacote_1min">Vídeo avulso · 1 vídeo de até 1 min — R$ 250</label></div>
+<div class="option"><input type="radio" id="pacote_3min" name="pacote" value="Vídeo avulso — 1 vídeo de até 3 min" data-price="350"><label for="pacote_3min">Vídeo avulso · 1 vídeo de até 3 min — R$ 350</label></div>
+<div class="option"><input type="radio" id="pacote_2videos" name="pacote" value="Pacote de 2 vídeos do mesmo imóvel, até 1 min cada" data-price="400"><label for="pacote_2videos">2 vídeos do mesmo imóvel · até 1 min cada — R$ 400</label></div>
+<div class="option"><input type="radio" id="pacote_3videos_1min" name="pacote" value="Pacote de 3 vídeos do mesmo imóvel, até 1 min cada" data-price="500"><label for="pacote_3videos_1min">3 vídeos do mesmo imóvel · até 1 min cada — R$ 500</label></div>
+<div class="option"><input type="radio" id="pacote_3videos_3min" name="pacote" value="Pacote de 3 vídeos do mesmo imóvel, até 3 min cada" data-price="600"><label for="pacote_3videos_3min">3 vídeos do mesmo imóvel · até 3 min cada — R$ 600</label></div>
+</div></div>
+<div class="field"><div class="option"><input type="checkbox" id="urgencia" value="Sim"><label for="urgencia">Desejo urgência na entrega (+ R$ 100)</label></div><p class="step-help" style="margin:8px 0 0">Ao selecionar a urgência, a taxa adicional é de R$ 100 e a entrega do vídeo será feita em até 24 horas após o término da captação.</p></div>
+<div class="field" style="border-top:1px solid var(--line);padding-top:14px"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><strong>Valor da proposta</strong><strong id="proposalTotal" style="font-size:22px;color:var(--blue)">Selecione um pacote</strong></div><p class="step-help" style="margin:7px 0 0">Confira o pacote e a opção de urgência antes de finalizar.</p></div>
+<div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="submit" class="submit" id="submit">FINALIZAR PROPOSTA</button></div><div class="error" id="error"></div></section>
 </form>
 <div class="success" id="success"><div class="icon">✓</div><h2>Briefing recebido!</h2><p>Obrigado. As informações foram gravadas com sucesso. A Drone VIXX já pode utilizá-las no planejamento da visita e da produção do vídeo.</p></div>
 </div><p class="small-note">Drone VIXX • Filmagem aérea e produção de vídeos</p>
@@ -64,7 +75,13 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px
 import { neon } from "./neon-client.js";
 
 let current=0;
-const steps=[...document.querySelectorAll(".step")];
+const allSteps=[...document.querySelectorAll(".step")];
+let steps=allSteps.filter(s=>!s.dataset.realEstateOnly);
+function configureSteps(){
+  const imobiliaria=document.querySelector('input[name="finalidade"]:checked')?.value==="Corretor de imóvel";
+  steps=allSteps.filter(s=>!s.dataset.realEstateOnly||imobiliaria);
+  if(current>=steps.length)current=steps.length-1;
+}
 
 function update(){
   steps.forEach((s,i)=>s.classList.toggle("active",i===current));
@@ -78,10 +95,18 @@ function validateStep(){
   for(const f of steps[current].querySelectorAll("input[required],select[required],textarea[required]")){
     if(!f.checkValidity()){f.reportValidity();return false}
   }
+  if(steps[current].dataset.realEstateOnly&&!document.querySelector('input[name="pacote"]:checked')){
+    alert("Selecione um pacote para finalizar a proposta.");return false;
+  }
   return true;
 }
-function nextStep(){if(validateStep()&&current<steps.length-1){current++;update()}}
-function prevStep(){if(current>0){current--;update()}}
+function nextStep(){
+  configureSteps();
+  if(!validateStep())return;
+  if(current<steps.length-1){current++;update();return}
+  document.getElementById("form").requestSubmit();
+}
+function prevStep(){configureSteps();if(current>0){current--;update()}}
 function checked(prefix){
   return [...document.querySelectorAll('input[id^="'+prefix+'"]')].filter(i=>i.checked).map(i=>i.value)
 }
@@ -92,6 +117,15 @@ document.getElementById("whatsapp").addEventListener("input",e=>{
   else if(v.length>2)v=v.replace(/(\d{2})(\d{0,5})/,"($1) $2");
   e.target.value=v
 });
+function updateProposalTotal(){
+  const selected=document.querySelector('input[name="pacote"]:checked');
+  const base=selected?Number(selected.dataset.price):0;
+  const total=base+(document.getElementById("urgencia").checked?100:0);
+  document.getElementById("proposalTotal").textContent=selected?"R$ "+total.toLocaleString("pt-BR"):"Selecione um pacote";
+}
+document.querySelectorAll('input[name="pacote"]').forEach(el=>el.addEventListener("change",updateProposalTotal));
+document.getElementById("urgencia").addEventListener("change",updateProposalTotal);
+document.querySelectorAll('input[name="finalidade"]').forEach(el=>el.addEventListener("change",()=>{configureSteps();update()}));
 document.getElementById("valor").addEventListener("input",e=>{
   let n=e.target.value.replace(/\D/g,"");
   if(!n){e.target.value="";return}
@@ -123,7 +157,10 @@ document.getElementById("form").addEventListener("submit",async e=>{
     referencia:document.getElementById("referencia").value.trim()||null,
     restricoes:document.getElementById("restricoes").value.trim()||null,
     objetivos_video:checked("obj_"),
-    indispensavel:document.getElementById("indispensavel").value.trim()||null
+    indispensavel:document.getElementById("indispensavel").value.trim()||null,
+    pacote_escolhido:document.querySelector('input[name="pacote"]:checked')?.value||null,
+    urgencia:document.getElementById("urgencia").checked,
+    valor_proposta:(()=>{const p=document.querySelector('input[name="pacote"]:checked');return p?Number(p.dataset.price)+(document.getElementById("urgencia").checked?100:0):null})()
   };
   const valorNumerico=document.getElementById("valor").value.replace(/\D/g,"");
   const payload={
@@ -152,6 +189,8 @@ document.getElementById("form").addEventListener("submit",async e=>{
 });
 window.nextStep=nextStep;
 window.prevStep=prevStep;
+configureSteps();
+updateProposalTotal();
 update();
 </script><div class="last-update" aria-label="Última atualização"><span id="lastUpdate">Última atualização: carregando...</span></div>
 <script>
