@@ -29,7 +29,7 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px
 <section class="step active"><h2 class="step-title">1. Seus dados</h2><p class="step-help">Precisamos saber quem será nosso contato para este imóvel.</p>
 <div class="field"><label>Nome <span class="required">*</span></label><input id="nome" required autocomplete="name" placeholder="Seu nome"></div>
 <div class="field"><label>WhatsApp <span class="required">*</span></label><input id="whatsapp" required inputmode="tel" autocomplete="tel" placeholder="(27) 99999-9999"></div>
-<div class="field"><label>CRECI</label><input id="creci" placeholder="Opcional"></div>
+<div class="field"><label>Finalidade <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Finalidade do serviço"><div class="option"><input type="radio" id="finalidade_corretor" name="finalidade" value="Corretor de imóvel" required><label for="finalidade_corretor">Corretor de imóvel</label></div><div class="option"><input type="radio" id="finalidade_eventos" name="finalidade" value="Eventos e festas" required><label for="finalidade_eventos">Eventos e festas</label></div><div class="option"><input type="radio" id="finalidade_agencias" name="finalidade" value="Agências de publicidade" required><label for="finalidade_agencias">Agências de publicidade</label></div><div class="option"><input type="radio" id="finalidade_institucional" name="finalidade" value="Institucional (empresas)" required><label for="finalidade_institucional">Institucional (empresas)</label></div></div></div>
 <div class="actions"><button type="button" class="next" onclick="nextStep()">Continuar →</button></div></section>
 <section class="step"><h2 class="step-title">2. O imóvel e suas características</h2><p class="step-help">Informe os dados do imóvel e suas principais características. Preencha apenas o que souber.</p>
 <div class="field"><label>Tipo de imóvel <span class="required">*</span></label><select id="tipo" required><option value="">Selecione</option><option>Apartamento</option><option>Cobertura</option><option>Casa</option><option>Casa em condomínio</option><option>Terreno</option><option>Comercial</option><option>Outro</option></select></div>
@@ -107,7 +107,7 @@ document.getElementById("form").addEventListener("submit",async e=>{
   const respostas={
     nome_corretor:document.getElementById("nome").value.trim(),
     whatsapp:document.getElementById("whatsapp").value.trim(),
-    creci:document.getElementById("creci").value.trim()||null,
+    finalidade:document.querySelector('input[name="finalidade"]:checked')?.value||null,
     tipo_imovel:document.getElementById("tipo").value,
     endereco:document.getElementById("endereco").value.trim(),
     bairro:document.getElementById("bairro").value.trim()||null,
@@ -129,7 +129,6 @@ document.getElementById("form").addEventListener("submit",async e=>{
   const payload={
     nome_corretor:respostas.nome_corretor,
     whatsapp:respostas.whatsapp,
-    creci:respostas.creci,
     tipo_imovel:respostas.tipo_imovel,
     endereco:respostas.endereco,
     bairro:respostas.bairro,
