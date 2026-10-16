@@ -86,7 +86,7 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 <div class="field"><label>Quantidade aproximada de vídeos</label><select id="quantidadeVideos"><option value="">Selecione</option><option>1 vídeo</option><option>2 vídeos</option><option>3 vídeos</option><option>4 a 5 vídeos</option><option>Mais de 5 vídeos</option><option>A definir</option></select></div>
 <div class="field"><label>Orçamento estimado (opcional)</label><select id="orcamentoEstimado"><option value="">Prefiro conversar antes</option><option>Até R$ 500</option><option>R$ 500 a R$ 1.000</option><option>R$ 1.000 a R$ 2.500</option><option>Acima de R$ 2.500</option><option>A definir conforme o projeto</option></select></div>
 <div class="field" style="border-top:1px solid var(--line);padding-top:14px"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><strong>Valor da proposta</strong><strong id="proposalTotal" style="font-size:18px;color:var(--blue)">Orçamento personalizado</strong></div><p class="step-help" style="margin:7px 0 0">Nenhum preço será estimado automaticamente para este segmento. A equipe avaliará o escopo e retornará com o orçamento.</p></div>
-<div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="submit" class="submit" id="submit">ENVIAR PEDIDO DE ORÇAMENTO</button></div><div class="error" id="error"></div></section>
+<div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="submit" class="submit" id="customSubmit">ENVIAR PEDIDO DE ORÇAMENTO</button></div><div class="error" id="error"></div></section>
 </form>
 <div class="success" id="success"><div class="icon">✓</div><h2>Briefing recebido!</h2><p>Obrigado. As informações foram gravadas com sucesso. A Drone VIXX já pode utilizá-las no planejamento da visita e da produção do vídeo.</p></div>
 </div><p class="small-note">Drone VIXX • Filmagem aérea e produção de vídeos</p>
@@ -200,7 +200,7 @@ document.getElementById("urgencia").addEventListener("change",updateProposalTota
 document.querySelectorAll('input[name="finalidade"]').forEach(el=>el.addEventListener("change",()=>{current=0;configureSegment();updateProposalTotal();update()}));
 document.getElementById("form").addEventListener("submit",async e=>{
   e.preventDefault();
-  const btn=document.getElementById("submit"),err=document.querySelector(".step.active .error")||document.getElementById("error");
+  const btn=document.querySelector(".step.active button[type=\"submit\"]"),err=document.querySelector(".step.active .error")||document.getElementById("error");
   err.style.display="none";btn.disabled=true;btn.textContent="ENVIANDO...";
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||null;
   const selected=document.querySelector('input[name="pacote"]:checked');
