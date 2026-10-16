@@ -200,7 +200,7 @@ document.getElementById("urgencia").addEventListener("change",updateProposalTota
 document.querySelectorAll('input[name="finalidade"]').forEach(el=>el.addEventListener("change",()=>{current=0;configureSegment();updateProposalTotal();update()}));
 document.getElementById("form").addEventListener("submit",async e=>{
   e.preventDefault();
-  const btn=document.getElementById("submit"),err=document.getElementById("error");
+  const btn=document.getElementById("submit"),err=document.querySelector(".step.active .error")||document.getElementById("error");
   err.style.display="none";btn.disabled=true;btn.textContent="ENVIANDO...";
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||null;
   const selected=document.querySelector('input[name="pacote"]:checked');
