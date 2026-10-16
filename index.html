@@ -234,7 +234,7 @@ document.getElementById("form").addEventListener("submit",async e=>{
   // Compatibilidade com as colunas atuais do banco: dados específicos ficam em respostas.
   const payload={
     nome_corretor:respostas.nome_corretor, whatsapp:respostas.whatsapp,
-    tipo_imovel:respostas.tipo_imovel,
+    tipo_imovel:respostas.tipo_imovel||respostas.tipo_servico,
     endereco:respostas.endereco,bairro:respostas.bairro,cidade:respostas.cidade,
     valor_venda:null,respostas,user_agent:navigator.userAgent
   };
