@@ -31,40 +31,39 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 @media(max-width:480px){.container{padding:13px 11px 28px}.card{padding:20px 15px}.grid,.options{grid-template-columns:1fr}.actions{position:sticky;bottom:7px;background:linear-gradient(transparent,#fff 25%);padding-top:12px}}
 
 .last-update{width:100%;text-align:center;font-size:10px;line-height:1.3;color:#8a8f98;margin:18px 0 10px;padding:0 12px;font-weight:400;}
-</style></head>
+.option input:checked+label{border-color:var(--green);background:#eaf7f0;color:#155b40}.option input:checked+label:before{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 4px #fff}.package-name{display:block;font-size:15px;font-weight:700;line-height:1.4;margin-bottom:5px}.package-description{display:block;font-size:12px;line-height:1.45;color:#7b8581;font-weight:400;margin-bottom:4px}[data-custom-package] .option label{display:block;padding:13px}[data-custom-package] .option label:before{float:left;margin-top:1px}@media(max-width:480px){[data-custom-package] .option label{min-height:unset}}\n[data-custom-package] .option label:before{display:inline-block}\n</style></head>
 <body><div class="container">
 <header><div class="topbar"><a class="admin-btn" href="auth.html">⚙ Admin</a></div><img class="logo" src="logo.jpg" alt="Drone VIXX" onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block'"><div class="logo-fallback">DRONE VIXX</div>
-<div class="badge">● Briefing online • leva cerca de 2 minutos</div><h1>Briefing pré-visita técnica</h1><p class="subtitle">Preencha antes de marcarmos a visita. Suas informações serão gravadas com segurança para o planejamento da produção.</p></header>
+<div class="badge">● Briefing online • leva cerca de 2 minutos</div><h1>Solicitação de produção audiovisual</h1><p class="subtitle">Conte o que você precisa. Vamos personalizar as perguntas conforme o tipo de serviço e preparar a proposta adequada.</p></header>
 <div class="progress-wrap"><div class="progress-top"><span id="progressText">Etapa 1 de 5</span><span id="progressPct">20%</span></div><div class="progress"><div class="progress-bar" id="progress"></div></div></div>
 <div class="card"><form id="form">
-<section class="step active"><h2 class="step-title">1. Seus dados</h2><p class="step-help">Precisamos saber quem será nosso contato para este imóvel.</p>
+<section class="step active"><h2 class="step-title">1. Seus dados</h2><p class="step-help">Precisamos saber quem será nosso contato e qual tipo de produção você procura.</p>
 <div class="field"><label>Nome <span class="required">*</span></label><input id="nome" required autocomplete="name" placeholder="Seu nome"></div>
 <div class="field"><label>WhatsApp <span class="required">*</span></label><input id="whatsapp" required inputmode="tel" autocomplete="tel" placeholder="(27) 99999-9999"></div>
-<div class="field"><label>Finalidade <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Finalidade do serviço"><div class="option"><input type="radio" id="finalidade_corretor" name="finalidade" value="Corretor de imóvel" required><label for="finalidade_corretor">Corretor de imóvel</label></div><div class="option"><input type="radio" id="finalidade_eventos" name="finalidade" value="Eventos e festas" required><label for="finalidade_eventos">Eventos e festas</label></div><div class="option"><input type="radio" id="finalidade_agencias" name="finalidade" value="Agências de publicidade" required><label for="finalidade_agencias">Agências de publicidade</label></div><div class="option"><input type="radio" id="finalidade_institucional" name="finalidade" value="Institucional (empresas)" required><label for="finalidade_institucional">Institucional (empresas)</label></div></div></div>
+<div class="field"><label>Finalidade <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Finalidade do serviço"><div class="option"><input type="radio" id="finalidade_corretor" name="finalidade" value="Imóveis e empreendimentos" required><label for="finalidade_corretor">Imóveis e empreendimentos</label></div><div class="option"><input type="radio" id="finalidade_eventos" name="finalidade" value="Eventos e festas" required><label for="finalidade_eventos">Eventos e festas</label></div><div class="option"><input type="radio" id="finalidade_agencias" name="finalidade" value="Publicidade e marketing" required><label for="finalidade_agencias">Publicidade e marketing</label></div><div class="option"><input type="radio" id="finalidade_institucional" name="finalidade" value="Empresas e institucional" required><label for="finalidade_institucional">Empresas e institucional</label></div></div></div>
 <div class="actions"><button type="button" class="next" onclick="nextStep()">Continuar →</button></div></section>
-<section class="step"><h2 class="step-title">2. O imóvel e suas características</h2><p class="step-help">Informe os dados do imóvel e suas principais características. Preencha apenas o que souber.</p>
-<div class="field"><label>Tipo de imóvel <span class="required">*</span></label><select id="tipo" required><option value="">Selecione</option><option>Apartamento</option><option>Cobertura</option><option>Casa</option><option>Casa em condomínio</option><option>Terreno</option><option>Comercial</option><option>Outro</option></select></div>
-<div class="field"><label>Endereço completo <span class="required">*</span></label><input id="endereco" required autocomplete="street-address" placeholder="Rua, número e complemento"></div>
+<section class="step" data-segment-details><h2 class="step-title">2. Sobre o serviço</h2><p class="step-help" id="segmentHelp">Conte-nos um pouco sobre o que precisa.</p>
+<div class="field"><label id="segmentTypeLabel">Tipo de serviço <span class="required">*</span></label><select id="segmentType" required><option value="">Selecione</option></select></div>
+<div class="field"><label id="goalLabel">Objetivo do vídeo <span class="required">*</span></label><select id="serviceGoal" required><option value="">Selecione</option></select></div>
+<div class="field"><label>Endereço ou local da gravação <span class="required">*</span></label><input id="endereco" required placeholder="Rua, número, bairro ou nome do local"></div>
 <div class="grid"><div class="field"><label>Bairro</label><input id="bairro"></div><div class="field"><label>Cidade <span class="required">*</span></label><input id="cidade" required autocomplete="address-level2"></div></div>
-<div class="field" style="margin-top:18px"><label>Ponto de referência importante</label><input id="referencia" placeholder="Ex.: praia, avenida, shopping, parque..."></div>
-<div class="grid"><div class="field"><label>Valor de venda</label><input id="valor" inputmode="numeric" placeholder="R$ 0"></div><div class="field"><label>Área aproximada</label><input id="area" inputmode="decimal" placeholder="Ex.: 120 m²"></div></div>
-
-<div class="grid"><div class="field"><label>Quartos</label><input id="quartos" inputmode="numeric" placeholder="Ex.: 3"></div><div class="field"><label>Suítes</label><input id="suites" inputmode="numeric" placeholder="Ex.: 2"></div><div class="field"><label>Banheiros</label><input id="banheiros" inputmode="numeric" placeholder="Ex.: 3"></div><div class="field"><label>Vagas</label><input id="vagas" inputmode="numeric" placeholder="Ex.: 2"></div></div>
-<div class="field"><label>Principais diferenciais do imóvel</label><textarea id="diferenciais" placeholder="Ex.: vista para o mar, varanda ampla, área gourmet, acabamento..."></textarea></div>
+<div class="field"><label>Ponto de referência</label><input id="referencia" placeholder="Ex.: avenida, praia, prédio próximo..."></div>
+<div class="grid"><div class="field"><label id="dateLabel">Data prevista</label><input id="dataServico" type="date"></div><div class="field"><label id="durationLabel">Duração ou período</label><select id="duracaoServico"><option value="">Selecione</option></select></div></div>
+<div class="field"><label>O que precisa aparecer no vídeo?</label><textarea id="diferenciais" placeholder="Descreva os ambientes, cenas, produtos, atrações ou detalhes importantes."></textarea></div>
+<div class="field"><label>Alguma informação adicional?</label><textarea id="informacoesAdicionais" placeholder="Opcional"></textarea></div>
 <div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="button" class="next" onclick="nextStep()">Continuar →</button></div></section>
 
-<section class="step"><h2 class="step-title">3. Apresentação, drone e vídeo</h2><p class="step-help">Marque o que devemos mostrar e informe restrições ou objetivos para a gravação.</p>
-<div class="options">
-<div class="option"><input type="checkbox" id="show_0" value="O imóvel"><label for="show_0">O imóvel</label></div><div class="option"><input type="checkbox" id="show_1" value="Vista"><label for="show_1">Vista</label></div><div class="option"><input type="checkbox" id="show_2" value="Praia / mar"><label for="show_2">Praia / mar</label></div><div class="option"><input type="checkbox" id="show_3" value="Condomínio"><label for="show_3">Condomínio</label></div><div class="option"><input type="checkbox" id="show_4" value="Área de lazer"><label for="show_4">Área de lazer</label></div><div class="option"><input type="checkbox" id="show_5" value="Localização"><label for="show_5">Localização</label></div><div class="option"><input type="checkbox" id="show_6" value="Bairro"><label for="show_6">Bairro</label></div><div class="option"><input type="checkbox" id="show_7" value="Comércio próximo"><label for="show_7">Comércio próximo</label></div><div class="option"><input type="checkbox" id="show_8" value="Vias de acesso"><label for="show_8">Vias de acesso</label></div>
-</div>
-
-<div class="field"><label>Tem algo indispensável que devemos mostrar?</label><textarea id="indispensavel" placeholder="Opcional"></textarea></div>
-<div class="field"><label>Existe alguma restrição para voo ou gravação?</label><textarea id="restricoes" placeholder="Ex.: não mostrar determinada área, vizinho, placa, interior de outro imóvel..."></textarea></div>
-<div class="field"><label>Objetivo do vídeo</label><div class="options">
-<div class="option"><input type="checkbox" id="obj_0" value="Anúncio do imóvel"><label for="obj_0">Anúncio do imóvel</label></div><div class="option"><input type="checkbox" id="obj_1" value="Instagram / Reels"><label for="obj_1">Instagram / Reels</label></div><div class="option"><input type="checkbox" id="obj_2" value="YouTube"><label for="obj_2">YouTube</label></div><div class="option"><input type="checkbox" id="obj_3" value="Anúncio patrocinado"><label for="obj_3">Anúncio patrocinado</label></div><div class="option"><input type="checkbox" id="obj_4" value="Enviar para cliente"><label for="obj_4">Enviar para cliente</label></div><div class="option"><input type="checkbox" id="obj_5" value="Outro"><label for="obj_5">Outro</label></div>
-</div></div>
-
-
+<section class="step" data-segment-briefing><h2 class="step-title">3. Detalhes da produção</h2><p class="step-help" id="briefingHelp">Personalize o que devemos registrar e como pretende usar o vídeo.</p>
+<div class="field"><label id="showLabel">O que é indispensável mostrar?</label><textarea id="itensMostrar" placeholder="Liste os pontos ou momentos indispensáveis."></textarea></div>
+<div class="field"><label>Formato de entrega desejado</label><div class="options" id="formatOptions">
+<div class="option"><input type="checkbox" id="formato_vertical" name="formatos" value="Vertical (Reels/Stories)"><label for="formato_vertical">Vertical (Reels/Stories)</label></div>
+<div class="option"><input type="checkbox" id="formato_horizontal" name="formatos" value="Horizontal"><label for="formato_horizontal">Horizontal</label></div>
+<div class="option"><input type="checkbox" id="formato_ambos" name="formatos" value="Vertical e horizontal"><label for="formato_ambos">Ambos</label></div>
+<div class="option"><input type="checkbox" id="formato_outro" name="formatos" value="Formato a combinar"><label for="formato_outro">A combinar</label></div></div></div>
+<div class="field"><label id="objectiveLabel">Onde o vídeo será utilizado?</label><div class="options" id="objectiveOptions">
+<div class="option"><input type="checkbox" id="obj_0" value="Instagram / Reels"><label for="obj_0">Instagram / Reels</label></div><div class="option"><input type="checkbox" id="obj_1" value="Anúncio patrocinado"><label for="obj_1">Anúncio patrocinado</label></div><div class="option"><input type="checkbox" id="obj_2" value="YouTube"><label for="obj_2">YouTube</label></div><div class="option"><input type="checkbox" id="obj_3" value="Site / apresentação"><label for="obj_3">Site / apresentação</label></div><div class="option"><input type="checkbox" id="obj_4" value="Uso interno"><label for="obj_4">Uso interno</label></div><div class="option"><input type="checkbox" id="obj_5" value="Outro"><label for="obj_5">Outro</label></div></div></div>
+<div class="field"><label>Existem restrições, regras do local ou algo que não deve aparecer?</label><textarea id="restricoes" placeholder="Informe regras de acesso, privacidade, restrições de voo ou gravação."></textarea></div>
+<div class="field"><label>Prazo desejado para receber o vídeo</label><select id="prazoEntrega"><option value="">Selecione</option><option>Sem urgência</option><option>Até 24 horas após a captação</option><option>Em até 3 dias</option><option>Em até 7 dias</option><option>A combinar</option></select></div>
 <div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="button" class="next" onclick="nextStep()">Continuar →</button></div><div class="error" id="error"></div></section>
 
 <section class="step" data-real-estate-only="true"><h2 class="step-title">4. Escolha seu pacote e finalize a proposta</h2><p class="step-help">Escolha a opção que melhor atende à sua necessidade. Nos pacotes com mais de um vídeo, cada vídeo pode ter uma proposta diferente: por exemplo, um com o corretor apresentando e falando, outro destacando apenas o imóvel e outro com foco no condomínio.</p>
@@ -78,22 +77,89 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 <div class="field urgency-box"><p class="urgency-heading">Precisa do vídeo com urgência?</p><div class="option"><input type="checkbox" id="urgencia" value="Sim"><label for="urgencia">Sim, quero entrega prioritária (+ R$ 100)</label></div><p class="urgency-description">Ao marcar esta opção, será acrescentada uma taxa de <strong>R$ 100</strong>. Seu vídeo será entregue em até <strong>24 horas após o término da captação</strong>. Se não precisar desse prazo prioritário, basta deixar a caixa desmarcada.</p></div>
 <div class="field" style="border-top:1px solid var(--line);padding-top:14px"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><strong>Valor da proposta</strong><strong id="proposalTotal" style="font-size:22px;color:var(--blue)">Selecione um pacote</strong></div><p class="step-help" style="margin:7px 0 0">Confira o pacote e a opção de urgência antes de finalizar.</p></div>
 <div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="submit" class="submit" id="submit">FINALIZAR PROPOSTA</button></div><div class="error" id="error"></div></section>
+<section class="step" data-custom-package><h2 class="step-title">4. Escopo e orçamento</h2><p class="step-help">Como cada evento, campanha ou produção institucional pode ter necessidades diferentes, vamos preparar um orçamento com base nas informações fornecidas. Selecione a opção que melhor descreve o pedido.</p>
+<div class="field"><label>Tipo de contratação <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Tipo de contratação">
+<div class="option"><input type="radio" id="custom_single" name="pacote" value="Produção avulsa — orçamento personalizado" data-price="0"><label for="custom_single"><span class="package-name">Produção avulsa</span><span class="package-description">Uma gravação ou vídeo com escopo definido conforme o briefing.</span></label></div>
+<div class="option"><input type="radio" id="custom_bundle" name="pacote" value="Pacote com múltiplas entregas — orçamento personalizado" data-price="0"><label for="custom_bundle"><span class="package-name">Pacote com múltiplas entregas</span><span class="package-description">Mais de um vídeo, formato ou peça de conteúdo na mesma produção.</span></label></div>
+<div class="option"><input type="radio" id="custom_coverage" name="pacote" value="Cobertura / projeto completo — orçamento personalizado" data-price="0"><label for="custom_coverage"><span class="package-name">Cobertura ou projeto completo</span><span class="package-description">Acompanhamento por período ou produção com planejamento específico.</span></label></div>
+</div></div>
+<div class="field"><label>Quantidade aproximada de vídeos</label><select id="quantidadeVideos"><option value="">Selecione</option><option>1 vídeo</option><option>2 vídeos</option><option>3 vídeos</option><option>4 a 5 vídeos</option><option>Mais de 5 vídeos</option><option>A definir</option></select></div>
+<div class="field"><label>Orçamento estimado (opcional)</label><select id="orcamentoEstimado"><option value="">Prefiro conversar antes</option><option>Até R$ 500</option><option>R$ 500 a R$ 1.000</option><option>R$ 1.000 a R$ 2.500</option><option>Acima de R$ 2.500</option><option>A definir conforme o projeto</option></select></div>
+<div class="field" style="border-top:1px solid var(--line);padding-top:14px"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><strong>Valor da proposta</strong><strong id="proposalTotal" style="font-size:18px;color:var(--blue)">Orçamento personalizado</strong></div><p class="step-help" style="margin:7px 0 0">Nenhum preço será estimado automaticamente para este segmento. A equipe avaliará o escopo e retornará com o orçamento.</p></div>
+<div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="submit" class="submit" id="submit">ENVIAR PEDIDO DE ORÇAMENTO</button></div><div class="error" id="error"></div></section>
 </form>
 <div class="success" id="success"><div class="icon">✓</div><h2>Briefing recebido!</h2><p>Obrigado. As informações foram gravadas com sucesso. A Drone VIXX já pode utilizá-las no planejamento da visita e da produção do vídeo.</p></div>
 </div><p class="small-note">Drone VIXX • Filmagem aérea e produção de vídeos</p>
 </div>
 <script type="module">
 import { neon } from "./neon-client.js";
-
 let current=0;
 const allSteps=[...document.querySelectorAll(".step")];
-let steps=allSteps.filter(s=>!s.dataset.realEstateOnly);
-function configureSteps(){
-  const imobiliaria=document.querySelector('input[name="finalidade"]:checked')?.value==="Corretor de imóvel";
-  steps=allSteps.filter(s=>!s.dataset.realEstateOnly||imobiliaria);
+let steps=[];
+const segmentConfig={
+  "Imóveis e empreendimentos":{
+    typeLabel:"Tipo de imóvel", goalLabel:"Finalidade do vídeo", help:"Informe os dados do imóvel e o objetivo da gravação.",
+    types:["Apartamento","Cobertura","Casa","Casa em condomínio","Terreno","Imóvel comercial","Empreendimento","Outro"],
+    goals:["Venda","Locação","Lançamento","Divulgação de empreendimento","Apresentação de imóvel"],
+    durations:["Vídeo curto (até 1 minuto)","Vídeo detalhado (até 3 minutos)","Mais de um vídeo","A definir"],
+    durationLabel:"Duração desejada dos vídeos", showLabel:"Diferenciais e pontos que devemos destacar",
+    objectives:["Anúncio do imóvel","Instagram / Reels","YouTube","Anúncio patrocinado","Enviar para cliente","Outro"]
+  },
+  "Eventos e festas":{
+    typeLabel:"Tipo de evento", goalLabel:"Objetivo da cobertura", help:"Informe o evento, o local e o período em que precisa da equipe.",
+    types:["Casamento","Aniversário","Festa","Show","Evento corporativo","Festival","Evento esportivo","Outro"],
+    goals:["Registrar os principais momentos","Mostrar o espaço e a estrutura","Vídeo de divulgação do evento","Conteúdo para redes sociais","Registro completo do evento"],
+    durations:["Até 1 hora","2 a 3 horas","4 a 5 horas","6 horas ou mais","A definir"],
+    durationLabel:"Tempo de cobertura estimado", showLabel:"Momentos, atrações e detalhes indispensáveis",
+    objectives:["Instagram / Reels","Vídeo resumo do evento","Registro completo","Divulgação de próxima edição","Uso interno","Outro"]
+  },
+  "Publicidade e marketing":{
+    typeLabel:"Tipo de produção", goalLabel:"Objetivo da campanha", help:"Descreva a campanha, a marca e os formatos que pretende produzir.",
+    types:["Anúncio publicitário","Vídeo promocional","Lançamento de produto","Conteúdo para redes sociais","Campanha de marca","Produção para cliente","Outro"],
+    goals:["Atrair clientes","Divulgar produto ou serviço","Fortalecer a marca","Gerar conteúdo para redes sociais","Campanha paga","Outro"],
+    durations:["Vídeo curto (até 30 segundos)","Até 1 minuto","Até 3 minutos","Pacote com vários vídeos","A definir"],
+    durationLabel:"Duração ou pacote desejado", showLabel:"Cenas, produtos e mensagens indispensáveis",
+    objectives:["Instagram / Reels","TikTok","YouTube","Anúncio patrocinado","Site / landing page","Múltiplos canais","Outro"]
+  },
+  "Empresas e institucional":{
+    typeLabel:"Tipo de local ou operação", goalLabel:"Objetivo do vídeo", help:"Conte sobre a empresa e o que precisa apresentar ou documentar.",
+    types:["Escritório","Fábrica ou indústria","Galpão ou centro logístico","Obra ou empreendimento","Instalações externas","Instituição","Outro"],
+    goals:["Apresentação institucional","Mostrar instalações e estrutura","Registrar operações e processos","Apresentar equipe e equipamentos","Divulgar projeto ou empreendimento","Comunicação interna"],
+    durations:["Vídeo curto (até 1 minuto)","Vídeo institucional (até 3 minutos)","Vídeo longo","Pacote com vários vídeos","A definir"],
+    durationLabel:"Duração ou pacote desejado", showLabel:"Áreas, processos e informações indispensáveis",
+    objectives:["Site da empresa","Redes sociais","Apresentação comercial","Comunicação interna","Relatório ou documentação","Outro"]
+  }
+};
+function fillSelect(el,items){el.innerHTML='<option value="">Selecione</option>'+items.map(x=>'<option>'+x+'</option>').join("")}
+function configureSegment(){
+  const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||"Imóveis e empreendimentos";
+  const cfg=segmentConfig[purpose]||segmentConfig["Imóveis e empreendimentos"];
+  document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
+  document.getElementById("goalLabel").innerHTML=cfg.goalLabel+' <span class="required">*</span>';
+  document.getElementById("segmentHelp").textContent=cfg.help;
+  document.getElementById("durationLabel").textContent=cfg.durationLabel;
+  document.getElementById("showLabel").textContent=cfg.showLabel;
+  fillSelect(document.getElementById("segmentType"),cfg.types);
+  fillSelect(document.getElementById("serviceGoal"),cfg.goals);
+  fillSelect(document.getElementById("duracaoServico"),cfg.durations);
+  const opts=document.getElementById("objectiveOptions");
+  opts.innerHTML=cfg.objectives.map((x,i)=>'<div class="option"><input type="checkbox" id="obj_'+i+'" value="'+x.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><label for="obj_'+i+'">'+x+'</label></div>').join("");
+  const isRealEstate=purpose==="Imóveis e empreendimentos";
+  steps=allSteps.filter(s=>!s.dataset.customPackage||!isRealEstate).filter(s=>!s.dataset.realEstateOnly||isRealEstate);
   if(current>=steps.length)current=steps.length-1;
+  const customTitle=document.querySelector("[data-custom-package] .step-title");
+  const customHelp=document.querySelector("[data-custom-package] .step-help");
+  if(purpose==="Eventos e festas"){
+    customTitle.textContent="4. Cobertura e orçamento";
+    customHelp.textContent="Selecione o tipo de contratação. O orçamento será calculado conforme duração, local, equipe e entregas.";
+  } else if(purpose==="Publicidade e marketing"){
+    customTitle.textContent="4. Pacote de produção";
+    customHelp.textContent="Escolha a estrutura de produção desejada. O valor será definido após avaliação do escopo.";
+  } else if(purpose==="Empresas e institucional"){
+    customTitle.textContent="4. Projeto institucional e orçamento";
+    customHelp.textContent="Selecione o formato mais próximo da sua necessidade. O orçamento será elaborado conforme o projeto.";
+  }
 }
-
 function update(){
   steps.forEach((s,i)=>s.classList.toggle("active",i===current));
   const pct=Math.round((current+1)/steps.length*100);
@@ -106,21 +172,14 @@ function validateStep(){
   for(const f of steps[current].querySelectorAll("input[required],select[required],textarea[required]")){
     if(!f.checkValidity()){f.reportValidity();return false}
   }
-  if(steps[current].dataset.realEstateOnly&&!document.querySelector('input[name="pacote"]:checked')){
-    alert("Selecione um pacote para finalizar a proposta.");return false;
+  if((steps[current].dataset.realEstateOnly!==undefined||steps[current].dataset.customPackage!==undefined)&&!document.querySelector('input[name="pacote"]:checked')){
+    alert("Selecione uma opção de contratação para continuar.");return false;
   }
   return true;
 }
-function nextStep(){
-  configureSteps();
-  if(!validateStep())return;
-  if(current<steps.length-1){current++;update();return}
-  document.getElementById("form").requestSubmit();
-}
-function prevStep(){configureSteps();if(current>0){current--;update()}}
-function checked(prefix){
-  return [...document.querySelectorAll('input[id^="'+prefix+'"]')].filter(i=>i.checked).map(i=>i.value)
-}
+function nextStep(){configureSegment();if(!validateStep())return;if(current<steps.length-1){current++;update();return}document.getElementById("form").requestSubmit()}
+function prevStep(){configureSegment();if(current>0){current--;update()}}
+function checked(prefix){return [...document.querySelectorAll('input[id^="'+prefix+'"]')].filter(i=>i.checked).map(i=>i.value)}
 document.getElementById("whatsapp").addEventListener("input",e=>{
   let v=e.target.value.replace(/\D/g,"").slice(0,11);
   if(v.length>10)v=v.replace(/(\d{2})(\d{5})(\d{4})/,"($1) $2-$3");
@@ -130,79 +189,68 @@ document.getElementById("whatsapp").addEventListener("input",e=>{
 });
 function updateProposalTotal(){
   const selected=document.querySelector('input[name="pacote"]:checked');
+  const custom=selected&&selected.closest("[data-custom-package]");
   const base=selected?Number(selected.dataset.price):0;
   const total=base+(document.getElementById("urgencia").checked?100:0);
-  document.getElementById("proposalTotal").textContent=selected?"R$ "+total.toLocaleString("pt-BR"):"Selecione um pacote";
+  const totalEl=document.getElementById("proposalTotal");
+  if(totalEl)totalEl.textContent=custom?"Orçamento personalizado":selected?"R$ "+total.toLocaleString("pt-BR"):"Selecione um pacote";
 }
 document.querySelectorAll('input[name="pacote"]').forEach(el=>el.addEventListener("change",updateProposalTotal));
 document.getElementById("urgencia").addEventListener("change",updateProposalTotal);
-document.querySelectorAll('input[name="finalidade"]').forEach(el=>el.addEventListener("change",()=>{configureSteps();update()}));
-document.getElementById("valor").addEventListener("input",e=>{
-  let n=e.target.value.replace(/\D/g,"");
-  if(!n){e.target.value="";return}
-  n=String(parseInt(n,10));
-  e.target.value="R$ "+n.replace(/\B(?=(\d{3})+(?!\d))/g,".")
-});
-
+document.querySelectorAll('input[name="finalidade"]').forEach(el=>el.addEventListener("change",()=>{current=0;configureSegment();updateProposalTotal();update()}));
 document.getElementById("form").addEventListener("submit",async e=>{
   e.preventDefault();
   const btn=document.getElementById("submit"),err=document.getElementById("error");
-  err.style.display="none";btn.disabled=true;btn.textContent="GRAVANDO...";
-
+  err.style.display="none";btn.disabled=true;btn.textContent="ENVIANDO...";
+  const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||null;
+  const selected=document.querySelector('input[name="pacote"]:checked');
+  const isRealEstate=purpose==="Imóveis e empreendimentos";
   const respostas={
     nome_corretor:document.getElementById("nome").value.trim(),
     whatsapp:document.getElementById("whatsapp").value.trim(),
-    finalidade:document.querySelector('input[name="finalidade"]:checked')?.value||null,
-    tipo_imovel:document.getElementById("tipo").value,
-    endereco:document.getElementById("endereco").value.trim(),
+    finalidade:purpose,
+    tipo_servico:document.getElementById("segmentType").value||null,
+    objetivo_servico:document.getElementById("serviceGoal").value||null,
+    endereco:document.getElementById("endereco").value.trim()||null,
     bairro:document.getElementById("bairro").value.trim()||null,
-    cidade:document.getElementById("cidade").value.trim(),
-    valor_venda_formatado:document.getElementById("valor").value.trim()||null,
-    area:document.getElementById("area").value.trim()||null,
-    quartos:document.getElementById("quartos").value.trim()||null,
-    suites:document.getElementById("suites").value.trim()||null,
-    banheiros:document.getElementById("banheiros").value.trim()||null,
-    vagas:document.getElementById("vagas").value.trim()||null,
-    diferenciais:document.getElementById("diferenciais").value.trim()||null,
-    itens_mostrar:checked("show_"),
+    cidade:document.getElementById("cidade").value.trim()||null,
     referencia:document.getElementById("referencia").value.trim()||null,
-    restricoes:document.getElementById("restricoes").value.trim()||null,
+    data_servico:document.getElementById("dataServico").value||null,
+    duracao_servico:document.getElementById("duracaoServico").value||null,
+    diferenciais:document.getElementById("diferenciais").value.trim()||null,
+    informacoes_adicionais:document.getElementById("informacoesAdicionais").value.trim()||null,
+    itens_mostrar:document.getElementById("itensMostrar").value.trim()||null,
+    formatos:checked("formato_"),
     objetivos_video:checked("obj_"),
-    indispensavel:document.getElementById("indispensavel").value.trim()||null,
-    pacote_escolhido:document.querySelector('input[name="pacote"]:checked')?.value||null,
-    urgencia:document.getElementById("urgencia").checked,
-    valor_proposta:(()=>{const p=document.querySelector('input[name="pacote"]:checked');return p?Number(p.dataset.price)+(document.getElementById("urgencia").checked?100:0):null})()
+    restricoes:document.getElementById("restricoes").value.trim()||null,
+    prazo_entrega:document.getElementById("prazoEntrega").value||null,
+    pacote_escolhido:selected?.value||null,
+    quantidade_videos:document.getElementById("quantidadeVideos").value||null,
+    orcamento_estimado:document.getElementById("orcamentoEstimado").value||null,
+    urgencia:isRealEstate&&document.getElementById("urgencia").checked,
+    valor_proposta:isRealEstate&&selected?Number(selected.dataset.price)+(document.getElementById("urgencia").checked?100:0):null,
+    tipo_imovel:isRealEstate?document.getElementById("segmentType").value:null
   };
-  const valorNumerico=document.getElementById("valor").value.replace(/\D/g,"");
+  // Compatibilidade com as colunas atuais do banco: dados específicos ficam em respostas.
   const payload={
-    nome_corretor:respostas.nome_corretor,
-    whatsapp:respostas.whatsapp,
+    nome_corretor:respostas.nome_corretor, whatsapp:respostas.whatsapp,
     tipo_imovel:respostas.tipo_imovel,
-    endereco:respostas.endereco,
-    bairro:respostas.bairro,
-    cidade:respostas.cidade,
-    valor_venda:valorNumerico?parseInt(valorNumerico,10):null,
-    respostas,
-    user_agent:navigator.userAgent
+    endereco:respostas.endereco,bairro:respostas.bairro,cidade:respostas.cidade,
+    valor_venda:null,respostas,user_agent:navigator.userAgent
   };
-
   try{
-    const { error }=await neon.from("briefings_corretor").insert(payload);
-    if(error) throw new Error(error.message||"Erro ao gravar no Neon");
+    const {error}=await neon.from("briefings_corretor").insert(payload);
+    if(error)throw new Error(error.message||"Erro ao gravar no banco de dados");
     document.getElementById("form").style.display="none";
     document.querySelector(".progress-wrap").style.display="none";
     document.getElementById("success").style.display="block";
   }catch(ex){
-    console.error(ex);
-    err.textContent="Não foi possível gravar o briefing no banco de dados. Tente novamente. ("+ex.message+")";
+    console.error(ex);err.textContent="Não foi possível gravar o pedido. Tente novamente. ("+ex.message+")";
     err.style.display="block";btn.disabled=false;btn.textContent="TENTAR NOVAMENTE";
   }
 });
-window.nextStep=nextStep;
-window.prevStep=prevStep;
-configureSteps();
-updateProposalTotal();
-update();
+window.nextStep=nextStep;window.prevStep=prevStep;
+configureSegment();updateProposalTotal();update();
 </script><div class="last-update" aria-label="Última atualização"><span id="lastUpdate">Última atualização: carregando...</span></div>
 <script>
 (async()=>{
