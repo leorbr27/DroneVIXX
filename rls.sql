@@ -1,4 +1,4 @@
--- RLS para o formulário público e área administrativa do projeto Corretores.
+-- RLS para o formulário público e área administrativa do projeto DroneVIXX.
 -- Execute este arquivo uma vez no SQL Editor do Neon, no banco "corretores".
 
 ALTER TABLE public.briefings_corretor ENABLE ROW LEVEL SECURITY;
