@@ -40,7 +40,7 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 <section class="step active"><h2 class="step-title">1. Seus dados</h2><p class="step-help">Precisamos saber quem será nosso contato e qual tipo de produção você procura.</p>
 <div class="field"><label>Nome <span class="required">*</span></label><input id="nome" required autocomplete="name" placeholder="Seu nome"></div>
 <div class="field"><label>WhatsApp <span class="required">*</span></label><input id="whatsapp" required inputmode="tel" autocomplete="tel" placeholder="(27) 99999-9999"></div>
-<div class="field"><label>Finalidade <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Finalidade do serviço"><div class="option"><input type="radio" id="finalidade_corretor" name="finalidade" value="Imóveis e empreendimentos" required><label for="finalidade_corretor">Imóveis e empreendimentos</label></div><div class="option"><input type="radio" id="finalidade_eventos" name="finalidade" value="Eventos e festas" required><label for="finalidade_eventos">Eventos e festas</label></div><div class="option"><input type="radio" id="finalidade_agencias" name="finalidade" value="Publicidade e marketing" required><label for="finalidade_agencias">Publicidade e marketing</label></div><div class="option"><input type="radio" id="finalidade_institucional" name="finalidade" value="Empresas e institucional" required><label for="finalidade_institucional">Empresas e institucional</label></div></div></div>
+<div class="field"><label>Finalidade <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Finalidade do serviço"><div class="option"><input type="radio" id="finalidade_corretor" name="finalidade" value="Imóveis e empreendimentos" required><label for="finalidade_corretor">Imóveis e empreendimentos</label></div><div class="option"><input type="radio" id="finalidade_eventos" name="finalidade" value="Eventos e festas" required><label for="finalidade_eventos">Eventos e festas</label></div><div class="option"><input type="radio" id="finalidade_agencias" name="finalidade" value="Publicidade e marketing" required><label for="finalidade_agencias">Publicidade e marketing</label></div><div class="option"><input type="radio" id="finalidade_institucional" name="finalidade" value="Empresas e institucional" required><label for="finalidade_institucional">Empresas e institucional</label></div><div class="option"><input type="radio" id="finalidade_obras" name="finalidade" value="Obras e construção civil" required><label for="finalidade_obras">Obras e construção civil</label></div><div class="option"><input type="radio" id="finalidade_turismo" name="finalidade" value="Turismo, hotéis e pousadas" required><label for="finalidade_turismo">Turismo, hotéis e pousadas</label></div><div class="option"><input type="radio" id="finalidade_outros" name="finalidade" value="Outros projetos" required><label for="finalidade_outros">Outros projetos</label></div></div></div>
 <div class="actions"><button type="button" class="next" onclick="nextStep()">Continuar →</button></div></section>
 <section class="step" data-segment-details><h2 class="step-title">2. Sobre o serviço</h2><p class="step-help" id="segmentHelp">Conte-nos um pouco sobre o que precisa.</p>
 <div class="field"><label id="segmentTypeLabel">Tipo de serviço <span class="required">*</span></label><select id="segmentType" required><option value="">Selecione</option></select></div>
@@ -129,7 +129,10 @@ const segmentConfig={
     durations:["Vídeo curto (até 1 minuto)","Vídeo institucional (até 3 minutos)","Vídeo longo","Pacote com vários vídeos","A definir"],
     durationLabel:"Duração ou pacote desejado", showLabel:"Áreas, processos e informações indispensáveis",
     objectives:["Site da empresa","Redes sociais","Apresentação comercial","Comunicação interna","Relatório ou documentação","Outro"]
-  }
+  },
+  "Obras e construção civil":{typeLabel:"Tipo de obra",goalLabel:"Objetivo do acompanhamento",help:"Informe o tipo de obra, a fase atual e como pretende utilizar os registros.",types:["Residencial","Comercial","Industrial","Infraestrutura","Loteamento","Reforma","Outro"],goals:["Acompanhamento periódico","Registro de etapa específica","Relatório visual de progresso","Divulgação do empreendimento","Registro para cliente ou investidores"],durations:["Captação única","Semanal","Quinzenal","Mensal","Personalizado"],durationLabel:"Frequência ou período",showLabel:"Etapas e áreas que precisam ser registradas",objectives:["Acompanhamento de obra","Relatório para cliente","Redes sociais","Apresentação a investidores","Documentação interna","Outro"]},
+  "Turismo, hotéis e pousadas":{typeLabel:"Tipo de estabelecimento ou destino",goalLabel:"Objetivo da produção",help:"Conte o que deseja divulgar e quais experiências ou locais devem chamar a atenção.",types:["Hotel","Pousada","Resort","Destino turístico","Praia ou atração natural","Parque ou atração","Outro"],goals:["Atrair reservas","Divulgar o destino","Apresentar estrutura e acomodações","Promover experiências e atividades","Campanha turística"],durations:["Vídeo curto (até 30 segundos)","Até 1 minuto","Até 3 minutos","Pacote com vários vídeos","A definir"],durationLabel:"Duração ou pacote desejado",showLabel:"Paisagens, espaços e experiências indispensáveis",objectives:["Site de reservas","Instagram / Reels","Anúncios patrocinados","Plataformas de turismo","YouTube","Outro"]},
+  "Outros projetos":{typeLabel:"Tipo de projeto",goalLabel:"Objetivo principal",help:"Explique sua necessidade. Vamos avaliar o formato mais adequado para o seu projeto.",types:["Filmagem aérea","Vídeo promocional","Registro técnico","Conteúdo para redes sociais","Outro"],goals:["Divulgação","Registro ou documentação","Apresentação","Acompanhamento","Ainda não definido"],durations:["Captação única","Até 1 minuto","Até 3 minutos","Pacote com vários vídeos","A definir"],durationLabel:"Duração ou período desejado",showLabel:"O que é importante registrar ou comunicar",objectives:["Redes sociais","Site ou apresentação","Uso interno","Relatório ou documentação","Outro"]}
 };
 
 const categoryQuestionConfig={
@@ -172,10 +175,40 @@ const categoryQuestionConfig={
     ["identidade_empresa","A empresa possui manual de marca e logotipo?","select",["Sim, enviaremos os arquivos","Possui apenas logotipo","Não possui","A confirmar"]],
     ["seguranca_empresa","É necessário treinamento, EPI ou acompanhamento interno?","textarea"],
     ["confidencial_empresa","Há áreas restritas ou informações confidenciais?","textarea"]
+  ],
+  "Obras e construção civil":[
+    ["tipo_obra","Qual é o tipo de obra ou empreendimento?","select",["Residencial","Comercial","Industrial","Infraestrutura","Loteamento","Reforma","Outro"]],
+    ["fase_obra","Em que fase a obra está atualmente?","select",["Terraplanagem/fundação","Estrutura","Alvenaria","Instalações","Acabamento","Finalizada","Outra"]],
+    ["frequencia_obra","Com que frequência deseja registrar a evolução?","select",["Uma única captação","Semanal","Quinzenal","Mensal","Por etapa","A definir"]],
+    ["objetivo_obra","Para quem serão apresentados os registros?","checkbox",["Cliente/contratante","Investidores","Equipe de engenharia","Redes sociais","Uso interno"]],
+    ["pontos_obra","Quais áreas ou etapas precisam de atenção especial?","textarea"],
+    ["seguranca_obra","Há regras de acesso, integração, EPI ou acompanhamento obrigatório?","textarea"],
+    ["restricoes_obra","Existem áreas restritas ou informações que não podem ser divulgadas?","textarea"]
+  ],
+  "Turismo, hotéis e pousadas":[
+    ["nome_destino","Qual é o nome do hotel, pousada ou destino?","text"],
+    ["publico_turismo","Qual público deseja atrair?","checkbox",["Casais","Famílias","Grupos","Turistas estrangeiros","Empresas/eventos","Aventura e natureza","Outro"]],
+    ["destaques_turismo","Quais instalações, paisagens ou experiências devem aparecer?","textarea"],
+    ["diferencial_turismo","Qual é o principal diferencial do local?","textarea"],
+    ["estilo_turismo","Qual estilo de vídeo combina mais com a marca?","select",["Sofisticado","Acolhedor","Aventura","Natureza","Familiar","Cinematográfico","A definir"]],
+    ["temporada_turismo","A produção está ligada a alguma temporada, promoção ou data especial?","text"],
+    ["reserva_turismo","Onde o público deve fazer a reserva ou obter mais informações?","text"],
+    ["restricoes_turismo","Há áreas, hóspedes ou atividades que não podem ser filmados?","textarea"]
+  ],
+  "Outros projetos":[
+    ["descricao_outro","Descreva o projeto e o que você precisa produzir.","textarea"],
+    ["local_outro","Onde será realizada a gravação ou captação?","text"],
+    ["resultado_outro","Qual resultado você espera alcançar com o material?","textarea"],
+    ["referencias_outro","Tem algum exemplo, referência ou ideia que possamos usar como orientação?","textarea"],
+    ["entregas_outro","Qual formato ou quantidade de vídeos/arquivos imagina receber?","text"],
+    ["observacoes_outro","Há alguma condição, prazo ou requisito importante?","textarea"]
   ]
 };
+let renderedCategoryPurpose=null;
 function renderCategoryQuestions(){
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||"Imóveis e empreendimentos";
+  if(purpose===renderedCategoryPurpose)return;
+  renderedCategoryPurpose=purpose;
   const host=document.getElementById("categoryQuestions");
   const items=categoryQuestionConfig[purpose]||[];
   host.innerHTML='<h3 class="step-title" style="font-size:17px;margin-top:24px">Perguntas específicas — '+purpose+'</h3><p class="step-help">Estas perguntas mudam conforme a finalidade selecionada.</p>'+items.map(([id,label,type,opts])=>{
@@ -217,6 +250,15 @@ function configureSegment(){
   } else if(purpose==="Empresas e institucional"){
     customTitle.textContent="4. Projeto institucional e orçamento";
     customHelp.textContent="Selecione o formato mais próximo da sua necessidade. O orçamento será elaborado conforme o projeto.";
+  } else if(purpose==="Obras e construção civil"){
+    customTitle.textContent="4. Acompanhamento de obra e orçamento";
+    customHelp.textContent="A proposta considerará frequência, acesso, duração e entregas.";
+  } else if(purpose==="Turismo, hotéis e pousadas"){
+    customTitle.textContent="4. Divulgação turística e orçamento";
+    customHelp.textContent="A proposta será preparada conforme os locais, experiências, formatos e entregas desejadas.";
+  } else if(purpose==="Outros projetos"){
+    customTitle.textContent="4. Seu projeto e orçamento";
+    customHelp.textContent="Com base no briefing, avaliaremos o escopo e prepararemos uma proposta adequada.";
   }
 }
 function update(){
