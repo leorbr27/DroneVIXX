@@ -23,12 +23,12 @@ button{width:100%;border:0;border-radius:12px;padding:14px;margin-top:14px;backg
 <div class="card">
 <div class="brand"><img src="logo.jpg" alt="Drone VIXX" onerror="this.style.display='none';document.querySelector('.fallback').style.display='block'"><div class="fallback">DRONE VIXX</div></div>
 <h1>Acesso administrativo</h1>
-<p class="sub">Esta área é exclusiva para administração dos briefings recebidos pelos corretores.</p>
+<p class="sub">Esta área é exclusiva para administração dos briefings recebidos pela equipe da Drone VIXX.</p>
 <label for="password">Senha administrativa</label>
 <input id="password" type="password" autocomplete="current-password" placeholder="Digite sua senha">
 <button id="enter" onclick="login()">Entrar na área administrativa</button>
 <div id="error" class="error">Senha incorreta. Tente novamente.</div>
-<p class="note">A autenticação acontece em uma página separada e não é apresentada no formulário enviado aos corretores.</p>
+<p class="note">A autenticação acontece em uma página separada e não é apresentada no formulário enviado à equipe solicitante.</p>
 </div></div>
 <script type="module">
 import { neon } from "./neon-client.js";
@@ -137,7 +137,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Enter")submitAuth()});
 (async()=>{
   const el=document.getElementById("lastUpdate");
   try{
-    const response=await fetch("https://api.github.com/repos/leorbr27/corretores/commits?per_page=1");
+    const response=await fetch("https://api.github.com/repos/leorbr27/DroneVIXX/commits?per_page=1");
     if(!response.ok) throw new Error("GitHub API");
     const commits=await response.json();
     const iso=commits?.[0]?.commit?.committer?.date;
