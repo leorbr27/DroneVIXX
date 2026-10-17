@@ -51,6 +51,7 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 <div class="grid"><div class="field"><label id="dateLabel">Data prevista</label><input id="dataServico" type="date"></div><div class="field"><label id="durationLabel">Duração ou período</label><select id="duracaoServico"><option value="">Selecione</option></select></div></div>
 <div class="field"><label>O que precisa aparecer no vídeo?</label><textarea id="diferenciais" placeholder="Descreva os ambientes, cenas, produtos, atrações ou detalhes importantes."></textarea></div>
 <div class="field"><label>Alguma informação adicional?</label><textarea id="informacoesAdicionais" placeholder="Opcional"></textarea></div>
+<div id="categoryQuestions"></div>
 <div class="actions"><button type="button" class="back" onclick="prevStep()">Voltar</button><button type="button" class="next" onclick="nextStep()">Continuar →</button></div></section>
 
 <section class="step" data-segment-briefing><h2 class="step-title">3. Detalhes da produção</h2><p class="step-help" id="briefingHelp">Personalize o que devemos registrar e como pretende usar o vídeo.</p>
@@ -130,8 +131,66 @@ const segmentConfig={
     objectives:["Site da empresa","Redes sociais","Apresentação comercial","Comunicação interna","Relatório ou documentação","Outro"]
   }
 };
+
+const categoryQuestionConfig={
+  "Imóveis e empreendimentos":[
+    ["tipo_imovel_detalhado","Como o imóvel está atualmente?", "select",["Mobiliado","Decorado","Vazio","Em construção","Outro"]],
+    ["area_imovel","Qual é a área aproximada do terreno/construção?","text"],
+    ["comodos_imovel","Quantos quartos, suítes, banheiros e vagas de garagem possui?","text"],
+    ["publico_imovel","Quem é o público ideal para este imóvel?","text"],
+    ["destaques_imovel","Quais são os principais diferenciais para destacar?","textarea"],
+    ["captacao_imovel","O que devemos mostrar nas imagens aéreas?","checkbox",["Fachada e terreno","Dimensão do imóvel","Vista e entorno","Condomínio e áreas comuns","Acessos e vias próximas","Outro"]],
+    ["presenca_corretor","Deseja aparecer no vídeo ou fazer uma apresentação?","select",["Sim, com apresentação do corretor","Somente imagens e textos","Narração em off","A combinar"]],
+    ["identificacao_corretor","Deseja incluir nome, telefone, CRECI ou logotipo?","text"]
+  ],
+  "Eventos e festas":[
+    ["nome_evento","Qual é o nome do evento?","text"],
+    ["publico_evento","Qual é o público estimado?","select",["Até 50 pessoas","51 a 150 pessoas","151 a 300 pessoas","301 a 500 pessoas","Mais de 500 pessoas","Ainda não sei"]],
+    ["momentos_evento","Quais momentos não podem faltar?","checkbox",["Preparação/montagem","Abertura","Público","Palco e atrações","Bastidores","Encerramento","Vista geral do local"]],
+    ["estilo_evento","Qual estilo de vídeo você prefere?","select",["Emocionante","Elegante","Dinâmico","Institucional","Festa e energia","Cinematográfico","A definir"]],
+    ["entrega_evento","Quando precisa receber o material?","select",["Durante o evento","No mesmo dia","Em até 3 dias","Em até 7 dias","A combinar"]],
+    ["entrevistas_evento","Deseja entrevistas ou depoimentos?","select",["Sim","Não","A definir"]],
+    ["marcas_evento","Há patrocinadores, marcas ou parceiros que precisam aparecer?","textarea"]
+  ],
+  "Publicidade e marketing":[
+    ["marca_campanha","Qual é a marca ou cliente da campanha?","text"],
+    ["publico_campanha","Quem é o público-alvo?","text"],
+    ["mensagem_campanha","Qual é a mensagem principal da campanha?","textarea"],
+    ["estilo_campanha","Qual estilo visual deseja?","select",["Cinematográfico","Moderno","Premium","Dinâmico","Institucional","Documental","A definir"]],
+    ["referencias_campanha","Tem referências de vídeos ou campanhas?","textarea"],
+    ["roteiro_campanha","Quem fornecerá o roteiro/storyboard?","select",["A agência","A Drone VIXX","Em conjunto","Ainda não definido"]],
+    ["versoes_campanha","Quantas versões/peças serão necessárias?","text"],
+    ["aprovacao_campanha","Quem aprovará o material e quantas rodadas de ajustes prevê?","text"],
+    ["direitos_campanha","Há regras de uso de imagem, confidencialidade ou direitos específicos?","textarea"]
+  ],
+  "Empresas e institucional":[
+    ["segmento_empresa","Qual é o segmento de atuação da empresa?","text"],
+    ["historia_empresa","Conte brevemente sobre a empresa e seus diferenciais.","textarea"],
+    ["setores_empresa","Quais setores, instalações ou processos devem aparecer?","textarea"],
+    ["publico_empresa","Quem assistirá ao vídeo?","checkbox",["Clientes","Parceiros","Investidores","Equipe","Fornecedores","Público geral"]],
+    ["pessoas_empresa","Há pessoas/equipes que devem aparecer ou dar depoimentos?","textarea"],
+    ["identidade_empresa","A empresa possui manual de marca e logotipo?","select",["Sim, enviaremos os arquivos","Possui apenas logotipo","Não possui","A confirmar"]],
+    ["seguranca_empresa","É necessário treinamento, EPI ou acompanhamento interno?","textarea"],
+    ["confidencial_empresa","Há áreas restritas ou informações confidenciais?","textarea"]
+  ]
+};
+function renderCategoryQuestions(){
+  const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||"Imóveis e empreendimentos";
+  const host=document.getElementById("categoryQuestions");
+  const items=categoryQuestionConfig[purpose]||[];
+  host.innerHTML='<h3 class="step-title" style="font-size:17px;margin-top:24px">Perguntas específicas — '+purpose+'</h3><p class="step-help">Estas perguntas mudam conforme a finalidade selecionada.</p>'+items.map(([id,label,type,opts])=>{
+    let control='';
+    if(type==="select") control='<select id="'+id+'" data-category-answer><option value="">Selecione</option>'+opts.map(x=>'<option>'+x+'</option>').join("")+'</select>';
+    else if(type==="checkbox") control='<div class="options">'+opts.map((x,i)=>'<div class="option"><input type="checkbox" id="'+id+'_'+i+'" data-category-group="'+id+'" value="'+x.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><label for="'+id+'_'+i+'">'+x+'</label></div>').join("")+'</div>';
+    else if(type==="textarea") control='<textarea id="'+id+'" data-category-answer placeholder="Opcional"></textarea>';
+    else control='<input id="'+id+'" data-category-answer placeholder="Opcional">';
+    return '<div class="field"><label for="'+id+'">'+label+'</label>'+control+'</div>';
+  }).join("");
+}
+
 function fillSelect(el,items){el.innerHTML='<option value="">Selecione</option>'+items.map(x=>'<option>'+x+'</option>').join("")}
 function configureSegment(){
+  renderCategoryQuestions();
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||"Imóveis e empreendimentos";
   const cfg=segmentConfig[purpose]||segmentConfig["Imóveis e empreendimentos"];
   document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
@@ -229,7 +288,8 @@ document.getElementById("form").addEventListener("submit",async e=>{
     orcamento_estimado:document.getElementById("orcamentoEstimado").value||null,
     urgencia:isRealEstate&&document.getElementById("urgencia").checked,
     valor_proposta:isRealEstate&&selected?Number(selected.dataset.price)+(document.getElementById("urgencia").checked?100:0):null,
-    tipo_imovel:isRealEstate?document.getElementById("segmentType").value:null
+    tipo_imovel:isRealEstate?document.getElementById("segmentType").value:null,
+    respostas_categoria:Object.fromEntries([...document.querySelectorAll("#categoryQuestions [data-category-answer]")].map(el=>[el.id,el.value||null]).concat([...document.querySelectorAll("#categoryQuestions [data-category-group]")].reduce((acc,el)=>{const id=el.dataset.categoryGroup;if(!acc.some(x=>x[0]===id))acc.push([id,checked(id+"_")]);return acc},[])))
   };
   // Compatibilidade com as colunas atuais do banco: dados específicos ficam em respostas.
   const payload={
