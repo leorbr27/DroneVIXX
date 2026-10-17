@@ -1,6 +1,6 @@
-BRIEFING DE ATENDIMENTO — CORRETORES
+BRIEFING DE ATENDIMENTO — DRONE VIXX
 Sugestão de perguntas por tipo de cliente
-Projeto: Corretores / Drone VIXX
+Projeto: DroneVIXX
 
 Este documento reúne perguntas para personalizar o briefing conforme a finalidade selecionada na primeira página. As perguntas podem ser usadas como base para o formulário do site. Sempre que possível, usar opções de múltipla escolha e deixar campos de texto para detalhes adicionais.
 
