@@ -1,0 +1,217 @@
+BRIEFING DE ATENDIMENTO — CORRETORES
+Sugestão de perguntas por tipo de cliente
+Projeto: Corretores / Drone VIXX
+
+Este documento reúne perguntas para personalizar o briefing conforme a finalidade selecionada na primeira página. As perguntas podem ser usadas como base para o formulário do site. Sempre que possível, usar opções de múltipla escolha e deixar campos de texto para detalhes adicionais.
+
+============================================================
+1. CORRETOR DE IMÓVEL
+============================================================
+
+A. Sobre o imóvel
+1. Qual é o tipo de imóvel?
+   ( ) Casa  ( ) Apartamento  ( ) Terreno  ( ) Imóvel comercial
+   ( ) Imóvel rural  ( ) Condomínio/loteamento  ( ) Outro
+2. Qual é o endereço do imóvel? (rua/número, se necessário para a produção)
+3. Em qual bairro e cidade fica o imóvel?
+4. Há um ponto de referência para localizar o imóvel?
+5. Qual é a área aproximada do terreno e/ou da construção?
+6. Quantos quartos, suítes, banheiros e vagas de garagem possui?
+7. Quais são os principais diferenciais que devem aparecer no vídeo?
+8. O imóvel está mobiliado, decorado, vazio ou em construção?
+9. Há áreas de lazer, piscina, jardim, vista especial ou outros destaques?
+
+B. Objetivo e público
+10. Qual é o objetivo principal do vídeo?
+    ( ) Venda  ( ) Locação  ( ) Lançamento  ( ) Divulgação de condomínio
+    ( ) Apresentação de carteira de imóveis  ( ) Outro
+11. Quem é o público que você deseja alcançar?
+12. Qual é o principal argumento de venda do imóvel?
+13. Existe alguma informação que precisa obrigatoriamente aparecer?
+14. Há alguma informação ou área que não deve ser mostrada?
+
+C. Captação e entrega
+15. O que deseja mostrar com imagens aéreas?
+    ( ) Fachada e terreno  ( ) Dimensão/localização  ( ) Vista e entorno
+    ( ) Condomínio e áreas comuns  ( ) Acesso e vias próximas  ( ) Outro
+16. Deseja imagens internas, externas ou somente aéreas?
+17. Há disponibilidade para preparar o imóvel antes da gravação?
+18. O imóvel estará acessível na data da captação? Quem acompanhará a equipe?
+19. Qual formato prefere?
+    ( ) Vertical para Reels/Stories  ( ) Horizontal para YouTube/site
+    ( ) Ambos
+20. Qual duração desejada?
+    ( ) Até 30 segundos  ( ) Até 1 minuto  ( ) Até 3 minutos  ( ) A definir
+21. Precisa de narração, textos na tela, música ou apresentação do corretor?
+22. Deseja incluir logotipo, nome, telefone, CRECI ou chamada para contato?
+23. Onde o vídeo será publicado?
+24. Qual é o prazo desejado para receber o material?
+
+============================================================
+2. EVENTOS E FESTAS
+============================================================
+
+A. Informações do evento
+1. Qual é o tipo de evento?
+   ( ) Casamento  ( ) Aniversário  ( ) Festa corporativa  ( ) Formatura
+   ( ) Show/festival  ( ) Evento esportivo  ( ) Feira/conferência  ( ) Outro
+2. Qual é o nome do evento?
+3. Qual é a data e o horário do evento?
+4. Qual é o endereço, bairro e cidade?
+5. Há um ponto de referência ou instruções de acesso?
+6. O evento será em local aberto, fechado ou em ambos?
+7. Qual é o público estimado?
+8. Quais são os momentos mais importantes que não podem faltar no vídeo?
+
+B. Objetivo e estilo
+9. Qual é o objetivo principal do vídeo?
+   ( ) Registro de recordação  ( ) Divulgação de futuras edições
+   ( ) Divulgação do espaço  ( ) Conteúdo para patrocinadores
+   ( ) Redes sociais  ( ) Outro
+10. Qual estilo deseja?
+    ( ) Emocionante  ( ) Elegante  ( ) Dinâmico  ( ) Institucional
+    ( ) Festa/energia  ( ) Cinematográfico  ( ) Outro
+11. Quais pessoas, atrações, ambientes ou detalhes devem receber destaque?
+12. Há patrocinadores, marcas ou parceiros que precisam aparecer?
+13. Existem restrições de imagem, pessoas que não podem ser filmadas ou áreas proibidas?
+14. Deseja entrevistas, depoimentos ou falas dos organizadores?
+
+C. Operação e entrega
+15. Quais momentos precisam de captação aérea?
+    ( ) Preparação/montagem  ( ) Abertura  ( ) Público  ( ) Palco/atrações
+    ( ) Vista geral do local  ( ) Encerramento  ( ) Outro
+16. Qual é a duração prevista da cobertura?
+17. Haverá uma pessoa responsável para acompanhar a equipe no local?
+18. O local possui regras ou autorizações específicas para uso de drone?
+19. Há alguma restrição de voo, área sensível ou orientação de segurança já conhecida?
+20. Qual formato de vídeo deseja?
+    ( ) Vertical  ( ) Horizontal  ( ) Ambos
+21. Precisa de um vídeo-resumo, vídeos curtos durante o evento ou os dois?
+22. Deseja receber conteúdo no mesmo dia ou após a edição?
+23. Qual é o prazo final de entrega?
+24. Há referências de vídeos ou estilos que gostaria de seguir?
+
+============================================================
+3. AGÊNCIAS DE PUBLICIDADE
+============================================================
+
+A. Cliente e campanha
+1. Qual é o nome da agência e quem será o contato responsável?
+2. Qual é a marca/cliente atendido?
+3. Qual produto, serviço ou campanha será divulgado?
+4. Qual é o objetivo da campanha?
+   ( ) Reconhecimento de marca  ( ) Vendas/conversão  ( ) Lançamento
+   ( ) Engajamento  ( ) Divulgação de local  ( ) Conteúdo institucional
+   ( ) Outro
+5. Quem é o público-alvo?
+6. Qual mensagem principal a campanha deve transmitir?
+7. Quais diferenciais, argumentos ou chamadas precisam aparecer?
+8. Existem diretrizes de marca, manual visual, logotipo ou identidade a seguir?
+
+B. Conceito criativo e produção
+9. Qual é o conceito criativo ou a ideia central da campanha?
+10. Qual estilo visual deseja?
+    ( ) Cinematográfico  ( ) Moderno  ( ) Premium  ( ) Dinâmico
+    ( ) Institucional  ( ) Documental  ( ) Outro
+11. Há referências de vídeos, anúncios ou campanhas?
+12. Quais cenas, locais, produtos, pessoas ou instalações precisam ser captados?
+13. A agência fornecerá roteiro, storyboard e lista de cenas?
+14. Haverá atores, apresentadores, locução ou depoimentos?
+15. Quais elementos devem ser evitados ou não podem aparecer?
+
+C. Formatos, direitos e entrega
+16. Em quais canais o conteúdo será veiculado?
+    ( ) Instagram/TikTok  ( ) YouTube  ( ) TV  ( ) Site  ( ) Mídia paga
+    ( ) Apresentação/evento  ( ) Outros
+17. Quais formatos são necessários?
+    ( ) Vertical  ( ) Horizontal  ( ) Quadrado  ( ) Versões múltiplas
+18. Qual duração e quantas versões/peças serão entregues?
+19. A entrega inclui material bruto ou somente vídeos finalizados?
+20. A edição será feita pela Drone VIXX ou pela agência?
+21. Há especificações técnicas, resolução, proporção ou limite de arquivo?
+22. Quem aprovará o material e como será o fluxo de aprovação?
+23. Quantas rodadas de ajustes são esperadas?
+24. Qual é o cronograma de roteiro, captação, primeira versão e entrega final?
+25. Existem direitos de uso, contratos, autorizações de imagem ou confidencialidade a considerar?
+26. Qual é o orçamento ou faixa de investimento prevista?
+
+D. Logística
+27. Qual é o endereço, bairro/cidade e ponto de referência da captação?
+28. Quais são as datas e janelas de horário disponíveis?
+29. Há necessidade de captar em mais de um local?
+30. Existe alguma restrição de voo, autorização local ou condição de segurança que devemos conhecer?
+
+============================================================
+4. INSTITUCIONAL (EMPRESAS)
+============================================================
+
+A. Sobre a empresa
+1. Qual é o nome da empresa e qual é o segmento de atuação?
+2. Qual é o endereço, bairro/cidade e ponto de referência?
+3. Qual é a história da empresa e há quanto tempo atua?
+4. Quais produtos, serviços ou operações devem ser apresentados?
+5. Quais são os principais diferenciais da empresa?
+6. Quem é o público do vídeo?
+   ( ) Clientes  ( ) Parceiros  ( ) Investidores  ( ) Equipe
+   ( ) Fornecedores  ( ) Público geral  ( ) Outro
+
+B. Objetivo e conteúdo
+7. Qual é o objetivo principal do vídeo?
+   ( ) Apresentação institucional  ( ) Divulgação de instalações
+   ( ) Apresentação de operação/processo  ( ) Recrutamento
+   ( ) Relacionamento com clientes  ( ) Relatório/projeto  ( ) Outro
+8. Qual mensagem a empresa quer transmitir?
+9. Quais setores, instalações, equipamentos ou processos precisam aparecer?
+10. Existem áreas ou informações confidenciais que não podem ser filmadas?
+11. Há pessoas que devem aparecer no vídeo? Quais cargos ou equipes?
+12. Deseja entrevistas, depoimentos, narração ou textos explicativos?
+13. Existem números, certificações, projetos ou resultados que precisam ser destacados?
+14. Há algum requisito de acessibilidade, como legendas?
+
+C. Identidade e entrega
+15. A empresa possui manual de marca, logotipo e identidade visual?
+16. Qual estilo deseja?
+    ( ) Formal/institucional  ( ) Humano e próximo  ( ) Tecnológico
+    ( ) Moderno  ( ) Cinematográfico  ( ) Outro
+17. Onde o vídeo será utilizado?
+    ( ) Site  ( ) Redes sociais  ( ) Apresentações comerciais
+    ( ) Eventos  ( ) Comunicação interna  ( ) Treinamentos  ( ) Outro
+18. Qual formato prefere?
+    ( ) Vertical  ( ) Horizontal  ( ) Ambos
+19. Qual duração desejada?
+    ( ) Até 1 minuto  ( ) 1 a 3 minutos  ( ) Mais de 3 minutos  ( ) A definir
+20. Precisa de versões curtas para redes sociais?
+21. Quem será responsável pela aprovação do material?
+22. Qual é o prazo desejado para entrega?
+
+D. Logística e segurança
+23. Quais são os dias e horários permitidos para captação?
+24. A empresa exige integração, treinamento, EPI ou acompanhamento interno?
+25. Existem regras de segurança, privacidade ou áreas restritas?
+26. A empresa já possui as autorizações necessárias para filmagem e voo, quando aplicáveis?
+27. Há alguma restrição de voo ou condição operacional que devemos considerar?
+28. Quem será o responsável por acompanhar a equipe no local?
+
+============================================================
+5. PERGUNTAS GERAIS PARA TODAS AS CATEGORIAS
+============================================================
+
+1. Qual é o nome do solicitante e da empresa/organização?
+2. Qual é o melhor telefone e e-mail para contato?
+3. Qual é a finalidade principal do material?
+4. Qual é a localização exata da captação e um ponto de referência?
+5. Qual é a data desejada e existe flexibilidade de agenda?
+6. Existe alguma restrição de voo, autorização, privacidade ou segurança que devemos conhecer?
+7. Há algo indispensável que devemos mostrar?
+8. Há algo que não devemos mostrar?
+9. Existem referências visuais ou exemplos do resultado esperado?
+10. Qual é o prazo de entrega?
+11. Há alguma observação adicional importante?
+
+OBSERVAÇÕES PARA IMPLEMENTAÇÃO DO FORMULÁRIO
+- Exibir primeiro as perguntas gerais e, em seguida, as perguntas específicas da categoria escolhida.
+- Não mostrar ao cliente perguntas de outras categorias.
+- Usar campos condicionais: por exemplo, perguntas sobre palco e atrações somente para eventos; sobre imóvel e dormitórios somente para imóveis.
+- Tornar obrigatórios apenas os dados essenciais para contato, localização, objetivo e planejamento da captação.
+- Manter campos de texto opcionais para detalhes não cobertos pelas alternativas.
+- As perguntas sobre voo devem servir para identificar restrições informadas pelo cliente; a viabilidade e as autorizações devem ser verificadas antes da operação.
