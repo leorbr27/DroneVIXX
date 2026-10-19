@@ -144,8 +144,6 @@ const categoryQuestionConfig={
     ["quartos_imovel","Número de quartos","select",["1","2","3","4","5","6 ou mais","Não se aplica"]],
     ["banheiros_imovel","Número de banheiros","select",["1","2","3","4","5","6 ou mais","Não se aplica"]],
     ["vagas_imovel","Vagas de garagem","select",["0","1","2","3","4","5 ou mais"]],
-    ["destaques_imovel","Quais são os principais diferenciais para destacar?","textarea"],
-    ["destaques_imovel","Quais são os principais diferenciais para destacar?","textarea"]
   ],
   "Eventos e festas":[
     ["nome_evento","Qual é o nome do evento?","text"],
@@ -259,12 +257,10 @@ function renderCategoryQuestions(){
     const roomsField=dynamicField("quartos_imovel");
     const bathroomsField=dynamicField("banheiros_imovel");
     const parkingField=dynamicField("vagas_imovel");
-    const highlightsField=dynamicField("destaques_imovel");
 
     host.append(propertySection,videoSection);
     [typeField,addressField,locationGrid,referenceField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
     [statusField,areaField,roomsField,bathroomsField,parkingField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
-    [highlightsField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [goalField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [dateField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [showField,durationField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
