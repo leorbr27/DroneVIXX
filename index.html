@@ -284,7 +284,7 @@ function configureSegment(){
   const cfg=segmentConfig[purpose]||segmentConfig["Imóveis e empreendimentos"];
   document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
   document.getElementById("goalLabel").innerHTML=(purpose==="Imóveis e empreendimentos"?"Finalidade":cfg.goalLabel)+' <span class="required">*</span>';
-  document.querySelector("[data-segment-details] .step-title").textContent=purpose==="Imóveis e empreendimentos"?"2. Sobre o serviço — Imóveis e empreendimentos":"2. Sobre o serviço";
+  document.querySelector("[data-segment-details] .step-title").textContent=purpose==="Imóveis e empreendimentos"?"2. Sobre o serviço":"2. Sobre o serviço";
   document.getElementById("segmentHelp").textContent=purpose==="Imóveis e empreendimentos"?"Informe os dados do imóvel e o objetivo da gravação. As perguntas mudam conforme a finalidade selecionada.":cfg.help;
   document.getElementById("durationLabel").textContent=purpose==="Imóveis e empreendimentos"?"Duração desejada dos vídeos":cfg.durationLabel;
   document.getElementById("showLabel").textContent=cfg.showLabel;
