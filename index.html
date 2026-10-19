@@ -242,6 +242,8 @@ function renderCategoryQuestions(){
       return el;
     };
     const propertySection=makeSection("Dados do imóvel","Informe a localização e os dados principais do imóvel, incluindo sua condição e estrutura.");
+    propertySection.querySelector("h4").remove();
+    propertySection.querySelector("p").remove();
     const videoSection=makeSection("Vídeo","Defina os diferenciais do imóvel, a finalidade e a captação do material.");
     const additionalSection=makeSection("","Inclua preferências de apresentação, elementos de contato e detalhes das imagens aéreas.","green");
     additionalSection.querySelector("h4").remove();
@@ -261,8 +263,7 @@ function renderCategoryQuestions(){
 
     host.append(propertySection,videoSection);
     [typeField,addressField,locationGrid,referenceField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
-    [statusField,areaField,roomsField,bathroomsField,parkingField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
-    [goalField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
+    [statusField,areaField,roomsField,bathroomsField,parkingField,goalField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
     [dateField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [showField,durationField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     const createCheckboxField=(id,label,options)=>{
@@ -320,8 +321,9 @@ function configureSegment(){
   const cfg=segmentConfig[purpose]||segmentConfig["Imóveis e empreendimentos"];
   document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
   document.getElementById("goalLabel").innerHTML=(purpose==="Imóveis e empreendimentos"?"Finalidade":cfg.goalLabel)+' <span class="required">*</span>';
-  document.querySelector("[data-segment-details] .step-title").textContent=purpose==="Imóveis e empreendimentos"?"2. Sobre o serviço":"2. Sobre o serviço";
-  document.getElementById("segmentHelp").textContent=purpose==="Imóveis e empreendimentos"?"Informe os dados do imóvel e o objetivo da gravação. As perguntas mudam conforme a finalidade selecionada.":cfg.help;
+  document.querySelector("[data-segment-details] .step-title").textContent=purpose==="Imóveis e empreendimentos"?"Dados do imóvel":"2. Sobre o serviço";
+  document.getElementById("segmentHelp").textContent=purpose==="Imóveis e empreendimentos"?"":cfg.help;
+  document.getElementById("segmentHelp").style.display=purpose==="Imóveis e empreendimentos"?"none":"";
   document.getElementById("durationLabel").textContent=purpose==="Imóveis e empreendimentos"?"Duração desejada dos vídeos":cfg.durationLabel;
   document.getElementById("showLabel").textContent=cfg.showLabel;
   fillSelect(document.getElementById("segmentType"),cfg.types);
