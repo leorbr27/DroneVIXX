@@ -144,7 +144,6 @@ const categoryQuestionConfig={
     ["vagas_imovel","Vagas de garagem","select",["0","1","2","3","4","5 ou mais"]],
     ["presenca_corretor","Como deseja aparecer no vídeo?","checkbox",["Apresentando e falando para a câmera","Aparecendo sem falar","Narração (somente voz)","Aparecendo sem falar + narração","Somente imagens, textos e trilha sonora","Incluir trilha sonora"]],
     ["identificacao_corretor","O que mais deseja incluir?","checkbox",["Telefone","WhatsApp","CRECI","Logotipo"]],
-    ["publico_imovel","Quem é o público ideal para este imóvel?","text"],
     ["destaques_imovel","Quais são os principais diferenciais para destacar?","textarea"],
     ["captacao_imovel","O que devemos mostrar nas imagens aéreas?","checkbox",["Fachada e terreno","Dimensão do imóvel","Vista e entorno","Condomínio e áreas comuns","Acessos e vias próximas","Outro"]]
   ],
@@ -284,8 +283,8 @@ function renderCategoryQuestions(){
     [highlightsField].filter(Boolean).forEach(el=>objectiveSection.appendChild(el));
     [goalField].filter(Boolean).forEach(el=>purposeSection.appendChild(el));
     [dateField,aerialField].filter(Boolean).forEach(el=>captureSection.appendChild(el));
-    [appearanceField,showField,durationField,extraField].filter(Boolean).forEach(el=>presentationSection.appendChild(el));
-    [identificationField].filter(Boolean).forEach(el=>finalSection.appendChild(el));
+    [appearanceField,showField,durationField,identificationField].filter(Boolean).forEach(el=>presentationSection.appendChild(el));
+    [extraField].filter(Boolean).forEach(el=>finalSection.appendChild(el));
   }
 }
 
