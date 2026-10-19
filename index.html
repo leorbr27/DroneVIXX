@@ -270,8 +270,9 @@ function renderCategoryQuestions(){
     [statusField,areaField,roomsField,bathroomsField,parkingField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
     [highlightsField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [goalField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
-    [dateField,aerialField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
+    [dateField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [appearanceField,showField,durationField,identificationField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
+    [aerialField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [extraField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
   }
 }
