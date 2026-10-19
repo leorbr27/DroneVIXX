@@ -239,7 +239,7 @@ function renderCategoryQuestions(){
     if(durationGrid?.classList.contains("grid"))durationGrid.style.display="contents";
     if(currentDateLabel)currentDateLabel.textContent="Data prevista da captação";
     // Reorder only the real-estate questions and related fields on this page.
-    const ordered=[typeField, dateField, aerialField, highlightsField, durationSingle, showField,
+    const ordered=[typeField, dynamicField("area_imovel"), dateField, aerialField, highlightsField, durationSingle, showField,
       dynamicField("quartos_imovel"), dynamicField("banheiros_imovel"), dynamicField("vagas_imovel"),
       dynamicField("presenca_corretor"), dynamicField("identificacao_corretor"),
       dynamicField("publico_imovel"), extraField];
