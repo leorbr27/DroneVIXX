@@ -264,8 +264,9 @@ function renderCategoryQuestions(){
     host.append(propertySection,videoSection);
     [typeField,addressField,locationGrid,referenceField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
     [statusField,areaField,roomsField,bathroomsField,parkingField,goalField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
-    [dateField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
-    [showField,durationField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
+    const nextStage=document.querySelector("[data-segment-briefing]");
+    [dateField,showField,durationField].filter(Boolean).forEach(el=>nextStage.insertBefore(el,nextStage.querySelector(".actions")));
+    if(nextStage)nextStage.insertBefore(additionalSection,nextStage.querySelector(".actions"));
     const createCheckboxField=(id,label,options)=>{
       const field=document.createElement("div");
       field.className="field";
@@ -302,7 +303,6 @@ function renderCategoryQuestions(){
       "Fachada","Terreno","Dimensão do imóvel","Vista e entorno","Condomínio e áreas comuns",
       "Bairro e proximidades","Acessos e ruas","Outro"
     ]);
-    host.appendChild(additionalSection);
     [appearanceField,includeField,aerialField,extraField].filter(Boolean).forEach(el=>additionalSection.appendChild(el));
 
     const stepHeader=document.createElement("div");
