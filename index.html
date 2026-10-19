@@ -48,7 +48,7 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 <div class="field"><label>Endereço ou local da gravação <span class="required">*</span></label><input id="endereco" required placeholder="Rua, número, bairro ou nome do local"></div>
 <div class="grid"><div class="field"><label>Bairro</label><input id="bairro"></div><div class="field"><label>Cidade <span class="required">*</span></label><input id="cidade" required autocomplete="address-level2"></div></div>
 <div class="field"><label>Ponto de referência</label><input id="referencia" placeholder="Ex.: avenida, praia, prédio próximo..."></div>
-<div class="grid"><div class="field"><label id="dateLabel">Data prevista</label><input id="dataServico" type="date"></div><div class="field"><label id="durationLabel">Duração ou período</label><select id="duracaoServico"><option value="">Selecione</option></select></div></div>
+<div class="grid"><div class="field"><label id="dateLabel">Data prevista da captação</label><input id="dataServico" type="date"></div><div class="field"><label id="durationLabel">Duração ou período</label><select id="duracaoServico"><option value="">Selecione</option></select></div></div>
 <div class="field"><label>O que precisa aparecer no vídeo?</label><textarea id="diferenciais" placeholder="Descreva os ambientes, cenas, produtos, atrações ou detalhes importantes."></textarea></div>
 <div class="field"><label>Alguma informação adicional?</label><textarea id="informacoesAdicionais" placeholder="Opcional"></textarea></div>
 <div id="categoryQuestions"></div>
@@ -139,12 +139,14 @@ const categoryQuestionConfig={
   "Imóveis e empreendimentos":[
     ["tipo_imovel_detalhado","Como o imóvel está atualmente?", "select",["Mobiliado","Decorado","Vazio","Em construção","Outro"]],
     ["area_imovel","Qual é a área aproximada do terreno/construção?","text"],
-    ["comodos_imovel","Quantos quartos, suítes, banheiros e vagas de garagem possui?","text"],
+    ["quartos_imovel","Quantidade de quartos","select",["1","2","3","4","5","6 ou mais","Não se aplica"]],
+    ["banheiros_imovel","Quantidade de banheiros","select",["1","2","3","4","5","6 ou mais","Não se aplica"]],
+    ["vagas_imovel","Vagas de garagem","select",["0","1","2","3","4","5 ou mais"]],
+    ["presenca_corretor","Como deseja aparecer no vídeo?","checkbox",["Apresentando e falando para a câmera","Aparecendo sem falar","Narração em off","Somente imagens e textos","Mais de uma versão, com estilos diferentes"]],
+    ["identificacao_corretor","O que mais deseja incluir?","checkbox",["Telefone","WhatsApp","CRECI","Logotipo"]],
     ["publico_imovel","Quem é o público ideal para este imóvel?","text"],
     ["destaques_imovel","Quais são os principais diferenciais para destacar?","textarea"],
-    ["captacao_imovel","O que devemos mostrar nas imagens aéreas?","checkbox",["Fachada e terreno","Dimensão do imóvel","Vista e entorno","Condomínio e áreas comuns","Acessos e vias próximas","Outro"]],
-    ["presenca_corretor","Deseja aparecer no vídeo ou fazer uma apresentação?","select",["Sim, com apresentação do corretor","Somente imagens e textos","Narração em off","A combinar"]],
-    ["identificacao_corretor","Deseja incluir nome, telefone, CRECI ou logotipo?","text"]
+    ["captacao_imovel","O que devemos mostrar nas imagens aéreas?","checkbox",["Fachada e terreno","Dimensão do imóvel","Vista e entorno","Condomínio e áreas comuns","Acessos e vias próximas","Outro"]]
   ],
   "Eventos e festas":[
     ["nome_evento","Qual é o nome do evento?","text"],
@@ -219,6 +221,31 @@ function renderCategoryQuestions(){
     else control='<input id="'+id+'" data-category-answer placeholder="Opcional">';
     return '<div class="field"><label for="'+id+'">'+label+'</label>'+control+'</div>';
   }).join("");
+  if(purpose==="Imóveis e empreendimentos"){
+    const section=host.closest("section");
+    const fieldFor=id=>section.querySelector("#"+id)?.closest(".field");
+    const dynamicField=id=>host.querySelector("#"+id)?.closest(".field");
+    const dateField=fieldFor("dataServico")?.parentElement;
+    const durationField=fieldFor("duracaoServico")?.closest(".grid");
+    const durationSingle=fieldFor("duracaoServico");
+    const showField=fieldFor("diferenciais");
+    const extraField=fieldFor("informacoesAdicionais");
+    const typeField=dynamicField("tipo_imovel_detalhado");
+    const aerialField=dynamicField("captacao_imovel");
+    const highlightsField=dynamicField("destaques_imovel");
+    const durationWrapper=durationField||durationSingle;
+    const currentDateLabel=section.querySelector("#dateLabel");
+    if(currentDateLabel)currentDateLabel.textContent="Data prevista da captação";
+    // Reorder only the real-estate questions and related fields on this page.
+    const ordered=[typeField, dateField, aerialField, highlightsField, durationWrapper, showField,
+      dynamicField("quartos_imovel"), dynamicField("banheiros_imovel"), dynamicField("vagas_imovel"),
+      dynamicField("presenca_corretor"), dynamicField("identificacao_corretor"),
+      dynamicField("publico_imovel"), extraField];
+    ordered.filter(Boolean).forEach(el=>host.appendChild(el));
+    const title=host.querySelector("h3");
+    const help=host.querySelector(".step-help");
+    if(title&&help){title.after(help);}
+  }
 }
 
 function fillSelect(el,items){el.innerHTML='<option value="">Selecione</option>'+items.map(x=>'<option>'+x+'</option>').join("")}
@@ -227,7 +254,7 @@ function configureSegment(){
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||"Imóveis e empreendimentos";
   const cfg=segmentConfig[purpose]||segmentConfig["Imóveis e empreendimentos"];
   document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
-  document.getElementById("goalLabel").innerHTML=cfg.goalLabel+' <span class="required">*</span>';
+  document.getElementById("goalLabel").innerHTML=(purpose==="Imóveis e empreendimentos"?"Finalidade":cfg.goalLabel)+' <span class="required">*</span>';
   document.getElementById("segmentHelp").textContent=cfg.help;
   document.getElementById("durationLabel").textContent=cfg.durationLabel;
   document.getElementById("showLabel").textContent=cfg.showLabel;
