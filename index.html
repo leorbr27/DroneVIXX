@@ -313,7 +313,7 @@ function renderCategoryQuestions(){
   }
 }
 
-function fillSelect(el,items){el.innerHTML='<option value="">Selecione</option>'+items.map(x=>'<option>'+x+'</option>').join("")}
+function fillSelect(el,items){const previous=el.value;el.innerHTML='<option value="">Selecione</option>'+items.map(x=>'<option>'+x+'</option>').join("");if(items.includes(previous))el.value=previous}
 function configureSegment(){
   renderCategoryQuestions();
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||"Imóveis e empreendimentos";
