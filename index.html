@@ -258,7 +258,7 @@ function configureSegment(){
   document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
   document.getElementById("goalLabel").innerHTML=(purpose==="Imóveis e empreendimentos"?"Finalidade":cfg.goalLabel)+' <span class="required">*</span>';
   document.getElementById("segmentHelp").textContent=cfg.help;
-  document.getElementById("durationLabel").textContent=cfg.durationLabel;
+  document.getElementById("durationLabel").textContent=purpose==="Imóveis e empreendimentos"?"Duração desejada dos vídeos":cfg.durationLabel;
   document.getElementById("showLabel").textContent=cfg.showLabel;
   fillSelect(document.getElementById("segmentType"),cfg.types);
   fillSelect(document.getElementById("serviceGoal"),cfg.goals);
