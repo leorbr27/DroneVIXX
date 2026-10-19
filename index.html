@@ -31,7 +31,8 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 @media(max-width:480px){.container{padding:13px 11px 28px}.card{padding:20px 15px}.grid,.options{grid-template-columns:1fr}.actions{position:sticky;bottom:7px;background:linear-gradient(transparent,#fff 25%);padding-top:12px}}
 
 .last-update{width:100%;text-align:center;font-size:10px;line-height:1.3;color:#8a8f98;margin:18px 0 10px;padding:0 12px;font-weight:400;}
-.option input:checked+label{border-color:var(--green);background:#eaf7f0;color:#155b40}.option input:checked+label:before{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 4px #fff}.package-name{display:block;font-size:15px;font-weight:700;line-height:1.4;margin-bottom:5px}.package-description{display:block;font-size:12px;line-height:1.45;color:#7b8581;font-weight:400;margin-bottom:4px}[data-custom-package] .option label{display:block;padding:13px}[data-custom-package] .option label:before{float:left;margin-top:1px}@media(max-width:480px){[data-custom-package] .option label{min-height:unset}}\n[data-custom-package] .option label:before{display:inline-block}\n</style></head>
+.option input:checked+label{border-color:var(--green);background:#eaf7f0;color:#155b40}.option input:checked+label:before{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 4px #fff}.package-name{display:block;font-size:15px;font-weight:700;line-height:1.4;margin-bottom:5px}.package-description{display:block;font-size:12px;line-height:1.45;color:#7b8581;font-weight:400;margin-bottom:4px}[data-custom-package] .option label{display:block;padding:13px}[data-custom-package] .option label:before{float:left;margin-top:1px}@media(max-width:480px){[data-custom-package] .option label{min-height:unset}}\n[data-custom-package] .option label:before{display:inline-block}\n.briefing-step-header{background:#fff;border:1px solid rgba(220,227,236,.9);border-radius:16px;padding:18px 16px;margin:8px 0 22px;box-shadow:0 7px 20px rgba(20,43,85,.05)}
+</style></head>
 <body><div class="container">
 <header><div class="topbar"><a class="admin-btn" href="auth.html">⚙ Admin</a></div><img class="logo" src="logo.jpg" alt="Drone VIXX" onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block'"><div class="logo-fallback">DRONE VIXX</div>
 <div class="badge">● Briefing online • leva cerca de 2 minutos</div><h1>Solicitação de produção audiovisual</h1><p class="subtitle">Conte o que você precisa. Vamos personalizar as perguntas conforme o tipo de serviço e preparar a proposta adequada.</p></header>
@@ -246,7 +247,8 @@ function renderCategoryQuestions(){
       return el;
     };
     const propertySection=makeSection("Dados do imóvel","Informe a localização e os dados principais do imóvel, incluindo sua condição e estrutura.");
-    const videoSection=makeSection("Vídeo","Defina os diferenciais do imóvel, a finalidade, a captação e a apresentação do material.");
+    const videoSection=makeSection("Vídeo","Defina os diferenciais do imóvel, a finalidade e a captação do material.");
+    const additionalSection=makeSection("Alguma informação adicional?","Inclua preferências de apresentação, elementos de contato e detalhes das imagens aéreas.","green");
 
     const typeField=fieldFor("segmentType");
     const addressField=fieldFor("endereco");
@@ -272,8 +274,15 @@ function renderCategoryQuestions(){
     [goalField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [dateField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [showField,durationField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
-    [appearanceField,identificationField,aerialField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
-    [extraField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
+    host.appendChild(additionalSection);
+    [appearanceField,identificationField,aerialField,extraField].filter(Boolean).forEach(el=>additionalSection.appendChild(el));
+
+    const stepHeader=document.createElement("div");
+    stepHeader.className="briefing-step-header";
+    const stepTitle=section.querySelector(":scope > .step-title");
+    const stepHelp=section.querySelector(":scope > .step-help");
+    stepHeader.append(stepTitle,stepHelp);
+    section.insertBefore(stepHeader,section.firstChild);
   }
 }
 
