@@ -225,19 +225,21 @@ function renderCategoryQuestions(){
     const section=host.closest("section");
     const fieldFor=id=>section.querySelector("#"+id)?.closest(".field");
     const dynamicField=id=>host.querySelector("#"+id)?.closest(".field");
-    const dateField=fieldFor("dataServico")?.parentElement;
-    const durationField=fieldFor("duracaoServico")?.closest(".grid");
+    const dateField=fieldFor("dataServico");
     const durationSingle=fieldFor("duracaoServico");
+    const dateGrid=dateField?.parentElement;
+    const durationGrid=durationSingle?.parentElement;
     const showField=fieldFor("diferenciais");
     const extraField=fieldFor("informacoesAdicionais");
     const typeField=dynamicField("tipo_imovel_detalhado");
     const aerialField=dynamicField("captacao_imovel");
     const highlightsField=dynamicField("destaques_imovel");
-    const durationWrapper=durationField||durationSingle;
     const currentDateLabel=section.querySelector("#dateLabel");
+    if(dateGrid?.classList.contains("grid"))dateGrid.style.display="contents";
+    if(durationGrid?.classList.contains("grid"))durationGrid.style.display="contents";
     if(currentDateLabel)currentDateLabel.textContent="Data prevista da captação";
     // Reorder only the real-estate questions and related fields on this page.
-    const ordered=[typeField, dateField, aerialField, highlightsField, durationWrapper, showField,
+    const ordered=[typeField, dateField, aerialField, highlightsField, durationSingle, showField,
       dynamicField("quartos_imovel"), dynamicField("banheiros_imovel"), dynamicField("vagas_imovel"),
       dynamicField("presenca_corretor"), dynamicField("identificacao_corretor"),
       dynamicField("publico_imovel"), extraField];
