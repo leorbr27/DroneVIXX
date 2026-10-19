@@ -246,12 +246,14 @@ function renderCategoryQuestions(){
       el.append(heading,helpText);
       return el;
     };
-    const propertySection=makeSection("Etapa 1 — Dados do imóvel","Primeiro, informe a localização e as características físicas do imóvel.");
+    const propertySection=makeSection("Etapa 1 — Do imóvel: dados do imóvel","Informe a localização e os dados principais do imóvel.");
     const propertyDetails=makeSection("Informações e características do imóvel","Detalhes para entendermos a condição e a estrutura do imóvel.","green");
-    const objectiveSection=makeSection("Etapa 2 — Objetivo e público-alvo","Com o imóvel definido, vamos identificar a finalidade comercial e o público.");
-    const captureSection=makeSection("Etapa 3 — Detalhes da captação e imagens aéreas","Defina a data e os elementos que precisam ser registrados.","green");
-    const presentationSection=makeSection("Etapa 4 — Formato da apresentação e estilo do vídeo","Escolha como deseja aparecer e a duração do material.");
-    const finalSection=makeSection("Etapa 5 — Informações finais e dados de contato na tela","Indique os elementos gráficos e outras informações que devem entrar no vídeo.","green");
+    const objectiveSection=makeSection("Etapa 2 — Do objetivo","Quais diferenciais do imóvel devem ser valorizados?");
+    const videosHeading=makeSection("Etapa 3 — Dos vídeos","Defina a finalidade, a captação e a apresentação do material.");
+    const purposeSection=makeSection("3.1 — Finalidade","Qual é a finalidade e a abordagem desejada para o vídeo.");
+    const captureSection=makeSection("3.2 — Captação","Defina a data e o que deve ser registrado nas imagens aéreas.","green");
+    const presentationSection=makeSection("3.3 — Formato e apresentação","Escolha como deseja aparecer, a duração e outros elementos do vídeo.");
+    const finalSection=makeSection("3.4 — Contato","Indique os dados de contato que devem aparecer na tela.","green");
 
     const title=host.querySelector("h3");
     const help=host.querySelector(".step-help");
@@ -267,7 +269,6 @@ function renderCategoryQuestions(){
     const roomsField=dynamicField("quartos_imovel");
     const bathroomsField=dynamicField("banheiros_imovel");
     const parkingField=dynamicField("vagas_imovel");
-    const audienceField=dynamicField("publico_imovel");
     const highlightsField=dynamicField("destaques_imovel");
     const aerialField=dynamicField("captacao_imovel");
     const appearanceField=dynamicField("presenca_corretor");
@@ -277,13 +278,14 @@ function renderCategoryQuestions(){
       title.style.marginTop="44px";
       title.after(help);
     }
-    host.append(propertySection,propertyDetails,objectiveSection,captureSection,presentationSection,finalSection);
+    host.append(propertySection,propertyDetails,objectiveSection,videosHeading,purposeSection,captureSection,presentationSection,finalSection);
     [typeField,addressField,locationGrid,referenceField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
     [statusField,areaField,roomsField,bathroomsField,parkingField].filter(Boolean).forEach(el=>propertyDetails.appendChild(el));
-    [goalField,audienceField,highlightsField].filter(Boolean).forEach(el=>objectiveSection.appendChild(el));
-    [dateField,aerialField,showField].filter(Boolean).forEach(el=>captureSection.appendChild(el));
-    [appearanceField,durationField].filter(Boolean).forEach(el=>presentationSection.appendChild(el));
-    [identificationField,extraField].filter(Boolean).forEach(el=>finalSection.appendChild(el));
+    [highlightsField].filter(Boolean).forEach(el=>objectiveSection.appendChild(el));
+    [goalField].filter(Boolean).forEach(el=>purposeSection.appendChild(el));
+    [dateField,aerialField].filter(Boolean).forEach(el=>captureSection.appendChild(el));
+    [appearanceField,showField,durationField,extraField].filter(Boolean).forEach(el=>presentationSection.appendChild(el));
+    [identificationField].filter(Boolean).forEach(el=>finalSection.appendChild(el));
   }
 }
 
