@@ -142,7 +142,7 @@ const categoryQuestionConfig={
     ["quartos_imovel","Número de quartos","select",["1","2","3","4","5","6 ou mais","Não se aplica"]],
     ["banheiros_imovel","Número de banheiros","select",["1","2","3","4","5","6 ou mais","Não se aplica"]],
     ["vagas_imovel","Vagas de garagem","select",["0","1","2","3","4","5 ou mais"]],
-    ["presenca_corretor","Como deseja aparecer no vídeo?","checkbox",["Apresentando e falando para a câmera","Aparecendo sem falar","Narração em off","Somente imagens e textos","Mais de uma versão, com estilos diferentes"]],
+    ["presenca_corretor","Como deseja aparecer no vídeo?","checkbox",["Apresentando e falando para a câmera","Aparecendo sem falar","Narração (somente voz)","Aparecendo sem falar + narração","Somente imagens, textos e trilha sonora","Incluir trilha sonora"]],
     ["identificacao_corretor","O que mais deseja incluir?","checkbox",["Telefone","WhatsApp","CRECI","Logotipo"]],
     ["publico_imovel","Quem é o público ideal para este imóvel?","text"],
     ["destaques_imovel","Quais são os principais diferenciais para destacar?","textarea"],
@@ -222,6 +222,8 @@ function renderCategoryQuestions(){
     return '<div class="field"><label for="'+id+'">'+label+'</label>'+control+'</div>';
   }).join("");
   if(purpose==="Imóveis e empreendimentos"){
+    const appearanceInputs=host.querySelectorAll('[data-category-group="presenca_corretor"]');
+    appearanceInputs.forEach(input=>input.required=true);
     const section=host.closest("section");
     const fieldFor=id=>section.querySelector("#"+id)?.closest(".field");
     const dynamicField=id=>host.querySelector("#"+id)?.closest(".field");
@@ -301,6 +303,12 @@ function update(){
 function validateStep(){
   for(const f of steps[current].querySelectorAll("input[required],select[required],textarea[required]")){
     if(!f.checkValidity()){f.reportValidity();return false}
+  }
+  const appearanceOptions=steps[current].querySelectorAll('input[data-category-group="presenca_corretor"]');
+  if(appearanceOptions.length&&!Array.from(appearanceOptions).some(input=>input.checked)){
+    alert("Selecione pelo menos uma opção em “Como deseja aparecer no vídeo?”.");
+    appearanceOptions[0].focus();
+    return false;
   }
   if((steps[current].dataset.realEstateOnly!==undefined||steps[current].dataset.customPackage!==undefined)&&!document.querySelector('input[name="pacote"]:checked')){
     alert("Selecione uma opção de contratação para continuar.");return false;
