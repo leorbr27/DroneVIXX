@@ -58,11 +58,10 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 
 <section class="step" data-segment-briefing><h2 class="step-title">3. Detalhes da produção</h2><p class="step-help" id="briefingHelp">Personalize o que devemos registrar e como pretende usar o vídeo.</p>
 <div class="field"><label id="showLabel">O que é indispensável mostrar?</label><textarea id="itensMostrar" placeholder="Liste os pontos ou momentos indispensáveis."></textarea></div>
-<div class="field"><label>Formato de entrega desejado</label><div class="options" id="formatOptions">
+<div class="field"><label>Formato de entrega desejado <span class="required">*</span></label><div class="options" id="formatOptions" role="group" aria-label="Formato de entrega desejado">
 <div class="option"><input type="checkbox" id="formato_vertical" name="formatos" value="Vertical (Reels/Stories)"><label for="formato_vertical">Vertical (Reels/Stories)</label></div>
 <div class="option"><input type="checkbox" id="formato_horizontal" name="formatos" value="Horizontal"><label for="formato_horizontal">Horizontal</label></div>
-<div class="option"><input type="checkbox" id="formato_ambos" name="formatos" value="Vertical e horizontal"><label for="formato_ambos">Ambos</label></div>
-<div class="option"><input type="checkbox" id="formato_outro" name="formatos" value="Formato a combinar"><label for="formato_outro">A combinar</label></div></div></div>
+<div class="option"><input type="checkbox" id="formato_ambos" name="formatos" value="Vertical e horizontal"><label for="formato_ambos">Ambos</label></div></div></div>
 <div class="field"><label id="objectiveLabel">Onde o vídeo será utilizado?</label><div class="options" id="objectiveOptions">
 <div class="option"><input type="checkbox" id="obj_0" value="Instagram / Reels"><label for="obj_0">Instagram / Reels</label></div><div class="option"><input type="checkbox" id="obj_1" value="Anúncio patrocinado"><label for="obj_1">Anúncio patrocinado</label></div><div class="option"><input type="checkbox" id="obj_2" value="YouTube"><label for="obj_2">YouTube</label></div><div class="option"><input type="checkbox" id="obj_3" value="Site / apresentação"><label for="obj_3">Site / apresentação</label></div><div class="option"><input type="checkbox" id="obj_4" value="Uso interno"><label for="obj_4">Uso interno</label></div><div class="option"><input type="checkbox" id="obj_5" value="Outro"><label for="obj_5">Outro</label></div></div></div>
 <div class="field"><label>Existem restrições, regras do local ou algo que não deve aparecer?</label><textarea id="restricoes" placeholder="Informe regras de acesso, privacidade, restrições de voo ou gravação."></textarea></div>
@@ -369,6 +368,7 @@ function validateStep(){
   for(const f of steps[current].querySelectorAll("input[required],select[required],textarea[required]")){
     if(!f.checkValidity()){f.reportValidity();return false}
   }
+  if(steps[current].dataset.segmentBriefing!==undefined&&!document.querySelector('input[name="formatos"]:checked')){alert("Selecione o formato de entrega desejado.");return false}
   if((steps[current].dataset.realEstateOnly!==undefined||steps[current].dataset.customPackage!==undefined)&&!document.querySelector('input[name="pacote"]:checked')){
     alert("Selecione uma opção de contratação para continuar.");return false;
   }
