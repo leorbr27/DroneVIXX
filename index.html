@@ -212,7 +212,7 @@ function renderCategoryQuestions(){
   renderedCategoryPurpose=purpose;
   const host=document.getElementById("categoryQuestions");
   const items=categoryQuestionConfig[purpose]||[];
-  host.innerHTML='<h3 class="step-title" style="font-size:17px;margin-top:44px">Perguntas específicas — '+purpose+'</h3><p class="step-help">Estas perguntas mudam conforme a finalidade selecionada.</p>'+items.map(([id,label,type,opts])=>{
+  host.innerHTML=items.map(([id,label,type,opts])=>{
     let control='';
     if(type==="select") control='<select id="'+id+'" data-category-answer><option value="">Selecione</option>'+opts.map(x=>'<option>'+x+'</option>').join("")+'</select>';
     else if(type==="checkbox") control='<div class="options">'+opts.map((x,i)=>'<div class="option"><input type="checkbox" id="'+id+'_'+i+'" data-category-group="'+id+'" value="'+x.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><label for="'+id+'_'+i+'">'+x+'</label></div>').join("")+'</div>';
@@ -254,8 +254,6 @@ function renderCategoryQuestions(){
     const presentationSection=makeSection("3.3 — Formato e apresentação","Escolha como deseja aparecer, a duração e outros elementos do vídeo.");
     const finalSection=makeSection("3.4 — Contato","Indique os dados de contato que devem aparecer na tela.","green");
 
-    const title=host.querySelector("h3");
-    const help=host.querySelector(".step-help");
     const typeField=fieldFor("segmentType");
     const addressField=fieldFor("endereco");
     const locationGrid=fieldFor("bairro")?.parentElement;
@@ -273,10 +271,6 @@ function renderCategoryQuestions(){
     const appearanceField=dynamicField("presenca_corretor");
     const identificationField=dynamicField("identificacao_corretor");
 
-    if(title&&help){
-      title.style.marginTop="44px";
-      title.after(help);
-    }
     host.append(propertySection,propertyDetails,objectiveSection,videosHeading,purposeSection,captureSection,presentationSection,finalSection);
     [typeField,addressField,locationGrid,referenceField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
     [statusField,areaField,roomsField,bathroomsField,parkingField].filter(Boolean).forEach(el=>propertyDetails.appendChild(el));
@@ -295,7 +289,8 @@ function configureSegment(){
   const cfg=segmentConfig[purpose]||segmentConfig["Imóveis e empreendimentos"];
   document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
   document.getElementById("goalLabel").innerHTML=(purpose==="Imóveis e empreendimentos"?"Finalidade":cfg.goalLabel)+' <span class="required">*</span>';
-  document.getElementById("segmentHelp").textContent=cfg.help;
+  document.querySelector("[data-segment-details] .step-title").textContent=purpose==="Imóveis e empreendimentos"?"2. Sobre o serviço — Imóveis e empreendimentos":"2. Sobre o serviço";
+  document.getElementById("segmentHelp").textContent=purpose==="Imóveis e empreendimentos"?"Informe os dados do imóvel e o objetivo da gravação. As perguntas mudam conforme a finalidade selecionada.":cfg.help;
   document.getElementById("durationLabel").textContent=purpose==="Imóveis e empreendimentos"?"Duração desejada dos vídeos":cfg.durationLabel;
   document.getElementById("showLabel").textContent=cfg.showLabel;
   fillSelect(document.getElementById("segmentType"),cfg.types);
