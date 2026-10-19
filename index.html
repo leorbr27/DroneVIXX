@@ -264,8 +264,44 @@ function renderCategoryQuestions(){
     [goalField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [dateField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
     [showField,durationField].filter(Boolean).forEach(el=>videoSection.appendChild(el));
+    const createCheckboxField=(id,label,options)=>{
+      const field=document.createElement("div");
+      field.className="field";
+      const title=document.createElement("label");
+      title.textContent=label;
+      field.appendChild(title);
+      const choices=document.createElement("div");
+      choices.className="options";
+      options.forEach((option,index)=>{
+        const item=document.createElement("div");
+        item.className="option";
+        const input=document.createElement("input");
+        input.type="checkbox";
+        input.id=id+"_"+index;
+        input.name=id;
+        input.value=option;
+        const optionLabel=document.createElement("label");
+        optionLabel.htmlFor=input.id;
+        optionLabel.textContent=option;
+        item.append(input,optionLabel);
+        choices.appendChild(item);
+      });
+      field.appendChild(choices);
+      return field;
+    };
+    const appearanceField=createCheckboxField("aparicao_video","Como deseja aparecer no vídeo?",[
+      "Apresentando e falando para a câmera","Aparecendo sem falar","Narração (somente voz)",
+      "Aparecendo sem falar + narração","Somente imagens, textos e trilha sonora","Incluir trilha sonora"
+    ]);
+    const includeField=createCheckboxField("incluir_video","O que mais deseja incluir?",[
+      "Telefone","WhatsApp","Instagram","CRECI","Logotipo"
+    ]);
+    const aerialField=createCheckboxField("imagens_aereas","O que devemos mostrar nas imagens aéreas?",[
+      "Fachada","Terreno","Dimensão do imóvel","Vista e entorno","Condomínio e áreas comuns",
+      "Bairro e proximidades","Acessos e ruas","Outro"
+    ]);
     host.appendChild(additionalSection);
-    [extraField].filter(Boolean).forEach(el=>additionalSection.appendChild(el));
+    [appearanceField,includeField,aerialField,extraField].filter(Boolean).forEach(el=>additionalSection.appendChild(el));
 
     const stepHeader=document.createElement("div");
     stepHeader.className="briefing-step-header";
@@ -376,6 +412,9 @@ document.getElementById("form").addEventListener("submit",async e=>{
     duracao_servico:document.getElementById("duracaoServico").value||null,
     diferenciais:document.getElementById("diferenciais").value.trim()||null,
     informacoes_adicionais:document.getElementById("informacoesAdicionais").value.trim()||null,
+    como_deseja_aparecer:checked("aparicao_video_"),
+    o_que_incluir:checked("incluir_video_"),
+    imagens_aereas:checked("imagens_aereas_"),
     itens_mostrar:document.getElementById("itensMostrar").value.trim()||null,
     formatos:checked("formato_"),
     objetivos_video:checked("obj_"),
