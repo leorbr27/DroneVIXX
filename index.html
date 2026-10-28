@@ -367,8 +367,11 @@ document.getElementById("urgencia").addEventListener("change",updateProposalTota
 document.querySelectorAll('input[name="finalidade"]').forEach(el=>el.addEventListener("change",()=>{current=0;configureSegment();updateProposalTotal();update()}));
 document.getElementById("form").addEventListener("submit",async e=>{
   e.preventDefault();
-  const btn=document.querySelector(".step.active button[type=\"submit\"]"),err=document.querySelector(".step.active .error")||document.getElementById("error");
-  err.style.display="none";btn.disabled=true;btn.textContent="ENVIANDO...";
+  const btn=e.submitter||document.querySelector(".step.active button[type=\"submit\"]")||document.getElementById("submit")||document.getElementById("customSubmit");
+  const err=document.querySelector(".step.active .error")||document.getElementById("error");
+  if(err)err.style.display="none";
+  if(btn){btn.disabled=true;btn.textContent="ENVIANDO...";}
+  try{
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||null;
   const selected=document.querySelector('input[name="pacote"]:checked');
   const isRealEstate=purpose==="Imóveis e empreendimentos";
@@ -412,15 +415,15 @@ document.getElementById("form").addEventListener("submit",async e=>{
     endereco:respostas.endereco,bairro:respostas.bairro,cidade:respostas.cidade,
     valor_venda:null,respostas,user_agent:navigator.userAgent
   };
-  try{
     const {error}=await neon.from("briefings_corretor").insert(payload);
     if(error)throw new Error(error.message||"Erro ao gravar no banco de dados");
     document.getElementById("form").style.display="none";
     document.querySelector(".progress-wrap").style.display="none";
     document.getElementById("success").style.display="block";
   }catch(ex){
-    console.error(ex);err.textContent="Não foi possível gravar o pedido. Tente novamente. ("+ex.message+")";
-    err.style.display="block";btn.disabled=false;btn.textContent="TENTAR NOVAMENTE";
+    console.error(ex);
+    if(err){err.textContent="Não foi possível gravar o pedido. Tente novamente. ("+(ex?.message||"erro desconhecido")+")";err.style.display="block";}
+    if(btn){btn.disabled=false;btn.textContent="TENTAR NOVAMENTE";}
   }
 });
 window.nextStep=nextStep;window.prevStep=prevStep;
