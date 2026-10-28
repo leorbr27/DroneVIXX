@@ -203,9 +203,10 @@ const categoryQuestionConfig={
   ]
 };
 let renderedCategoryPurpose=null;
+let realEstateCustomRendered=false;
 function renderCategoryQuestions(){
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||"Imóveis e empreendimentos";
-  if(purpose===renderedCategoryPurpose)return;
+  if(purpose===renderedCategoryPurpose && (purpose!=="Imóveis e empreendimentos" || realEstateCustomRendered))return;
   renderedCategoryPurpose=purpose;
   const host=document.getElementById("categoryQuestions");
   if(purpose==="Imóveis e empreendimentos" && document.querySelector('input[name="finalidade"]:checked')){
@@ -227,6 +228,7 @@ function renderCategoryQuestions(){
     title3.textContent="3. Detalhes da produção";help3.textContent="Personalize o que devemos registrar e como pretende usar o vídeo.";
     replaceSection(section,title2,help2,actions2);
     replaceSection(step3,title3,help3,actions3);
+    host.style.display="none";section.insertBefore(host,actions2);
     const propertyType=select("segmentType",["Apartamento","Cobertura","Casa","Casa em condomínio","Terreno","Imóvel comercial","Empreendimento","Outro"],true);
     section.insertBefore(field('<span class="required-triangle" aria-hidden="true">▶</span>Tipo de imóvel',propertyType),actions2);
     const addr=input("endereco","Rua, número ou local da gravação");addr.required=true;
@@ -262,6 +264,7 @@ function renderCategoryQuestions(){
     c4.append(checks("formatos","Formato de entrega desejado",["Vertical (Reels/Stories/Shorts)","Horizontal (YouTube)"],{radio:true,required:true}));
     c4.append(field('<span class="required-triangle" aria-hidden="true">▶</span>Prazo de entrega',select("prazoEntrega",["Urgência (24h, com taxas)","3 dias","7 dias"],true),true));
     [c1,c2,c3,c4].forEach(c=>step3.insertBefore(c,actions3));
+    realEstateCustomRendered=true;
     const css=document.createElement("style");css.textContent=".required-triangle{color:#d71920;font-size:12px;margin-right:7px;display:inline-block}.briefing-subsection{margin:22px 0;padding:18px 16px 8px}.briefing-subsection h4{background:var(--blue);color:#fff;padding:12px 14px;border-radius:8px;margin:0 0 18px}";document.head.append(css);
     return;
   }
