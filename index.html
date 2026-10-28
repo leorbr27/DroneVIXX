@@ -42,7 +42,7 @@ section[data-real-estate-only="true"] .package-description{display:block;font-si
 <section class="step active"><h2 class="step-title">1. Seus dados</h2><p class="step-help">Precisamos saber quem será nosso contato e qual tipo de produção você procura.</p>
 <div class="field"><label>Nome <span class="required">*</span></label><input id="nome" required autocomplete="name" placeholder="Seu nome"></div>
 <div class="field"><label>WhatsApp <span class="required">*</span></label><input id="whatsapp" required inputmode="tel" autocomplete="tel" placeholder="(27) 99999-9999"></div>
-<div class="field"><label>Finalidade <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Finalidade do serviço"><div class="option"><input type="radio" id="finalidade_corretor" name="finalidade" value="Imóveis e empreendimentos" required><label for="finalidade_corretor">Imóveis e empreendimentos</label></div><div class="option"><input type="radio" id="finalidade_eventos" name="finalidade" value="Eventos e festas" required><label for="finalidade_eventos">Eventos e festas</label></div><div class="option"><input type="radio" id="finalidade_agencias" name="finalidade" value="Publicidade e marketing" required><label for="finalidade_agencias">Publicidade e marketing</label></div><div class="option"><input type="radio" id="finalidade_institucional" name="finalidade" value="Empresas e institucional" required><label for="finalidade_institucional">Empresas e institucional</label></div><div class="option"><input type="radio" id="finalidade_obras" name="finalidade" value="Obras e construção civil" required><label for="finalidade_obras">Obras e construção civil</label></div><div class="option"><input type="radio" id="finalidade_turismo" name="finalidade" value="Turismo, hotéis e pousadas" required><label for="finalidade_turismo">Turismo, hotéis e pousadas</label></div><div class="option"><input type="radio" id="finalidade_outros" name="finalidade" value="Outros projetos" required><label for="finalidade_outros">Outros projetos</label></div></div></div>
+<div class="field"><label>Finalidade <span class="required">*</span></label><div class="options" role="radiogroup" aria-label="Finalidade do serviço"><div class="option"><input type="radio" id="finalidade_corretor" name="finalidade" value="Imóveis e empreendimentos" required><label for="finalidade_corretor">Corretores e Imobiliárias</label></div><div class="option"><input type="radio" id="finalidade_eventos" name="finalidade" value="Eventos e festas" required><label for="finalidade_eventos">Festas e Eventos</label></div><div class="option"><input type="radio" id="finalidade_agencias" name="finalidade" value="Publicidade e marketing" required><label for="finalidade_agencias">Publicidade e marketing</label></div><div class="option"><input type="radio" id="finalidade_institucional" name="finalidade" value="Empresas e institucional" required><label for="finalidade_institucional">Institucional e Empresas</label></div><div class="option"><input type="radio" id="finalidade_obras" name="finalidade" value="Obras e construção civil" required><label for="finalidade_obras">Obras e construção civil</label></div><div class="option"><input type="radio" id="finalidade_turismo" name="finalidade" value="Turismo, hotéis e pousadas" required><label for="finalidade_turismo">Turismo, hotéis e pousadas</label></div><div class="option"><input type="radio" id="finalidade_outros" name="finalidade" value="Outros projetos" required><label for="finalidade_outros">Outros projetos</label></div></div></div>
 <div class="actions"><button type="button" class="next" onclick="nextStep()">Continuar →</button></div></section>
 <section class="step" data-segment-details><h2 class="step-title">2. Sobre o serviço</h2><p class="step-help" id="segmentHelp">Conte-nos um pouco sobre o que precisa.</p>
 <div class="field"><label id="segmentTypeLabel">Tipo de serviço <span class="required">*</span></label><select id="segmentType" required><option value="">Selecione</option></select></div>
@@ -208,6 +208,63 @@ function renderCategoryQuestions(){
   if(purpose===renderedCategoryPurpose)return;
   renderedCategoryPurpose=purpose;
   const host=document.getElementById("categoryQuestions");
+  if(purpose==="Imóveis e empreendimentos"){
+    const section=host.closest("section");
+    const step3=document.querySelector("[data-segment-briefing]");
+    const actions2=section.querySelector(".actions");
+    const actions3=step3.querySelector(".actions");
+    const title2=section.querySelector(":scope > .step-title");
+    const help2=section.querySelector(":scope > .step-help");
+    const title3=step3.querySelector(":scope > .step-title");
+    const help3=step3.querySelector(":scope > .step-help");
+    const field=(label,control,required=false)=>{const d=document.createElement("div");d.className="field";const l=document.createElement("label");l.innerHTML=(required?'<span class="required-triangle" aria-hidden="true">▶</span>':"")+label;d.append(l,control);return d};
+    const input=(id,placeholder="",type="text")=>{const e=document.createElement("input");e.id=id;e.type=type;e.placeholder=placeholder;return e};
+    const select=(id,opts,required=false)=>{const e=document.createElement("select");e.id=id;if(required)e.required=true;e.innerHTML='<option value="">Selecione</option>'+opts.map(x=>'<option>'+x+'</option>').join("");return e};
+    const textarea=(id,placeholder="")=>{const e=document.createElement("textarea");e.id=id;e.placeholder=placeholder;return e};
+    const checks=(id,label,opts,{radio=false,required=false,checked=[]}={})=>{const d=document.createElement("div");d.className="field";const l=document.createElement("label");l.innerHTML=(required?'<span class="required-triangle" aria-hidden="true">▶</span>':"")+label;d.append(l);const wrap=document.createElement("div");wrap.className="options";opts.forEach((v,i)=>{const item=document.createElement("div");item.className="option";const e=document.createElement("input");e.type=radio?"radio":"checkbox";e.id=id+"_"+i;e.name=id;e.value=v;if(required&&radio)e.required=true;if(checked.includes(v))e.checked=true;const el=document.createElement("label");el.htmlFor=e.id;el.textContent=v;item.append(e,el);wrap.append(item)});d.append(wrap);return d};
+    const replaceSection=(el,title,help,actions)=>{el.replaceChildren(title,help,actions)};
+    title2.textContent="Dados do imóvel";help2.textContent="";
+    title3.textContent="3. Detalhes da produção";help3.textContent="Personalize o que devemos registrar e como pretende usar o vídeo.";
+    replaceSection(section,title2,help2,actions2);
+    replaceSection(step3,title3,help3,actions3);
+    const propertyType=select("segmentType",["Apartamento","Cobertura","Casa","Casa em condomínio","Terreno","Imóvel comercial","Empreendimento","Outro"],true);
+    section.insertBefore(field('<span class="required-triangle" aria-hidden="true">▶</span>Tipo de imóvel',propertyType),actions2);
+    const addr=input("endereco","Rua, número ou local da gravação");addr.required=true;
+    section.insertBefore(field('<span class="required-triangle" aria-hidden="true">▶</span>Endereço ou local da gravação',addr,true),actions2);
+    const loc=document.createElement("div");loc.className="grid";
+    const bairro=input("bairro","Bairro");const cidade=input("cidade","Cidade");cidade.required=true;cidade.autocomplete="address-level2";
+    loc.append(field("Bairro",bairro),field('<span class="required-triangle" aria-hidden="true">▶</span>Cidade',cidade,true));section.insertBefore(loc,actions2);
+    section.insertBefore(field("Ponto de referência",input("referencia","Ponto de referência")),actions2);
+    section.insertBefore(field("Como o imóvel está atualmente?",select("tipo_imovel_detalhado",["Mobiliado/decorado","Vazio","Em construção","Outro"])),actions2);
+    section.insertBefore(field("Qual é a área aproximada do terreno/construção?",input("area_imovel","Área aproximada")),actions2);
+    section.insertBefore(field("Número de quartos",select("quartos_imovel",["1","2","3","4","5 ou mais","Não se aplica"])),actions2);
+    section.insertBefore(field("Número de banheiros",select("banheiros_imovel",["1","2","3","4","5 ou mais","Não se aplica"])),actions2);
+    section.insertBefore(field("Vagas de garagem",select("vagas_imovel",["0","1","2","3","4","5 ou mais"])),actions2);
+    section.insertBefore(field('<span class="required-triangle" aria-hidden="true">▶</span>Finalidade',select("serviceGoal",["Venda","Locação","Lançamento","Divulgação de empreendimento","Apresentação de imóvel"],true),true),actions2);
+    const card=(name,description)=>{const d=document.createElement("div");d.className="briefing-subsection";const h=document.createElement("h4");h.textContent=name;d.append(h);if(description){const p=document.createElement("p");p.textContent=description;d.append(p)}return d};
+    const c1=card("Imóvel","");
+    c1.append(checks("imagens_aereas","O que devemos mostrar nas imagens aéreas?",["Fachada","Terreno","Dimensão do imóvel","Vista e entorno","Condomínio e áreas comuns","Bairro e proximidades","Acessos e ruas","Outro"]));
+    c1.append(field("O que deve, obrigatoriamente, aparecer no vídeo?",textarea("diferenciais","")));
+    c1.append(field("O que NÃO deve, obrigatoriamente, aparecer no vídeo?",textarea("restricoes","")));
+    c1.append(checks("incluir_video","O que mais deseja incluir?",["Telefone / WhatsApp","Instagram","CRECI","Logomarca"],{checked:["Telefone / WhatsApp","Instagram","CRECI","Logomarca"]}));
+    c1.append(field("Alguma informação adicional?",textarea("informacoesAdicionais","")));
+    const c2=card("Captação","As filmagens têm duração média de 1 a 2 horas por imóvel. É aconselhável não marcar outros compromissos com clientes no período das gravações");
+    const date=input("dataServico","", "date");date.required=true;
+    const time=input("horaCaptacao","","time");time.required=true;
+    c2.append(field('<span class="required-triangle" aria-hidden="true">▶</span>Data prevista da captação',date,true),field('<span class="required-triangle" aria-hidden="true">▶</span>Horário',time,true));
+    const addressCopy=input("enderecoCaptacao","");addressCopy.readOnly=true;addressCopy.value=[addr.value,bairro.value,cidade.value].filter(Boolean).join(", ");
+    const syncAddress=()=>{addressCopy.value=[addr.value,bairro.value,cidade.value].filter(Boolean).join(", ")};[addr,bairro,cidade].forEach(e=>e.addEventListener("input",syncAddress));
+    c2.append(field("Endereço",addressCopy),checks("autorizacaoVoo","É necessário enviar autorização de voo?",["Sim","Não"],{radio:true,required:true,checked:["Não"]}));
+    const c3=card("Corretor","");
+    c3.append(checks("aparicao_video","Como você deseja aparecer no vídeo?",["Apresentando e falando para a câmera","Aparecendo sem falar","Aparecendo sem falar + narração","Falando sem aparecer (narração - somente voz)","Não aparecer (somente imagens, textos e trilha sonora)"],{radio:true,required:true}));
+    const c4=card("Entrega","");
+    c4.append(field('<span class="required-triangle" aria-hidden="true">▶</span>Duração dos vídeos',select("duracaoVideo",["Vídeo curto (até 1 minuto)","Vídeo detalhado (de 1 até 3 minutos)","Mais de um vídeo","A definir"],true),true));
+    c4.append(checks("formatos","Formato de entrega desejado",["Vertical (Reels/Stories/Shorts)","Horizontal (YouTube)"],{radio:true,required:true}));
+    c4.append(field('<span class="required-triangle" aria-hidden="true">▶</span>Prazo de entrega',select("prazoEntrega",["Urgência (24h, com taxas)","3 dias","7 dias"],true),true));
+    [c1,c2,c3,c4].forEach(c=>step3.insertBefore(c,actions3));
+    const css=document.createElement("style");css.textContent=".required-triangle{color:#d71920;font-size:12px;margin-right:7px;display:inline-block}.briefing-subsection{margin:22px 0;padding:18px 16px 8px}.briefing-subsection h4{background:var(--blue);color:#fff;padding:12px 14px;border-radius:8px;margin:0 0 18px}";document.head.append(css);
+    return;
+  }
   const items=categoryQuestionConfig[purpose]||[];
   host.innerHTML=items.map(([id,label,type,opts])=>{
     let control='';
@@ -217,103 +274,7 @@ function renderCategoryQuestions(){
     else control='<input id="'+id+'" data-category-answer placeholder="Opcional">';
     return '<div class="field"><label for="'+id+'">'+label+'</label>'+control+'</div>';
   }).join("");
-  if(purpose==="Imóveis e empreendimentos"){
-    const section=host.closest("section");
-    const fieldFor=id=>section.querySelector("#"+id)?.closest(".field");
-    const dynamicField=id=>host.querySelector("#"+id)?.closest(".field");
-    const dateField=fieldFor("dataServico");
-    const durationField=fieldFor("duracaoServico");
-    const dateGrid=dateField?.parentElement;
-    const durationGrid=durationField?.parentElement;
-    const currentDateLabel=section.querySelector("#dateLabel");
-    if(dateGrid?.classList.contains("grid"))dateGrid.style.display="contents";
-    if(durationGrid?.classList.contains("grid"))durationGrid.style.display="contents";
-    if(currentDateLabel)currentDateLabel.textContent="Data prevista da captação";
-
-    const makeSection=(title,description,theme="blue")=>{
-      const el=document.createElement("div");
-      el.className="briefing-subsection briefing-flow-section briefing-plain-section";
-      const heading=document.createElement("h4");
-      heading.textContent=title;
-      const helpText=document.createElement("p");
-      helpText.textContent=description;
-      el.append(heading,helpText);
-      return el;
-    };
-    const propertySection=makeSection("Dados do imóvel","Informe a localização e os dados principais do imóvel, incluindo sua condição e estrutura.");
-    propertySection.querySelector("h4").remove();
-    propertySection.querySelector("p").remove();
-    const videoSection=makeSection("Vídeo","Defina os diferenciais do imóvel, a finalidade e a captação do material.");
-    videoSection.querySelector("h4").remove();
-    const additionalSection=makeSection("","Inclua preferências de apresentação, elementos de contato e detalhes das imagens aéreas.","green");
-    additionalSection.querySelector("h4").remove();
-
-    const typeField=fieldFor("segmentType");
-    const addressField=fieldFor("endereco");
-    const locationGrid=fieldFor("bairro")?.parentElement;
-    const referenceField=fieldFor("referencia");
-    const goalField=fieldFor("serviceGoal");
-    const showField=fieldFor("diferenciais");
-    const extraField=fieldFor("informacoesAdicionais");
-    const statusField=dynamicField("tipo_imovel_detalhado");
-    const areaField=dynamicField("area_imovel");
-    const roomsField=dynamicField("quartos_imovel");
-    const bathroomsField=dynamicField("banheiros_imovel");
-    const parkingField=dynamicField("vagas_imovel");
-
-    host.append(propertySection,videoSection);
-    [typeField,addressField,locationGrid,referenceField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
-    [statusField,areaField,roomsField,bathroomsField,parkingField,goalField].filter(Boolean).forEach(el=>propertySection.appendChild(el));
-    const nextStage=document.querySelector("[data-segment-briefing]");
-    [dateField,showField,durationField].filter(Boolean).forEach(el=>nextStage.insertBefore(el,nextStage.querySelector(".actions")));
-    if(nextStage)nextStage.insertBefore(additionalSection,nextStage.querySelector(".actions"));
-    const createCheckboxField=(id,label,options)=>{
-      const field=document.createElement("div");
-      field.className="field";
-      const title=document.createElement("label");
-      title.textContent=label;
-      field.appendChild(title);
-      const choices=document.createElement("div");
-      choices.className="options";
-      options.forEach((option,index)=>{
-        const item=document.createElement("div");
-        item.className="option";
-        const input=document.createElement("input");
-        input.type="checkbox";
-        input.id=id+"_"+index;
-        input.name=id;
-        input.value=option;
-        const optionLabel=document.createElement("label");
-        optionLabel.htmlFor=input.id;
-        optionLabel.textContent=option;
-        item.append(input,optionLabel);
-        choices.appendChild(item);
-      });
-      field.appendChild(choices);
-      return field;
-    };
-    const appearanceField=createCheckboxField("aparicao_video","Como deseja aparecer no vídeo?",[
-      "Apresentando e falando para a câmera","Aparecendo sem falar","Narração (somente voz)",
-      "Aparecendo sem falar + narração","Somente imagens, textos e trilha sonora","Incluir trilha sonora"
-    ]);
-    const includeField=createCheckboxField("incluir_video","O que mais deseja incluir?",[
-      "Telefone","WhatsApp","Instagram","CRECI","Logotipo"
-    ]);
-    const aerialField=createCheckboxField("imagens_aereas","O que devemos mostrar nas imagens aéreas?",[
-      "Fachada","Terreno","Dimensão do imóvel","Vista e entorno","Condomínio e áreas comuns",
-      "Bairro e proximidades","Acessos e ruas","Outro"
-    ]);
-    [appearanceField,includeField,aerialField,extraField].filter(Boolean).forEach(el=>additionalSection.appendChild(el));
-
-    const stepHeader=document.createElement("div");
-    stepHeader.className="briefing-step-header";
-    const stepTitle=section.querySelector(":scope > .step-title");
-    const stepHelp=section.querySelector(":scope > .step-help");
-    stepHeader.append(stepTitle,stepHelp);
-    section.insertBefore(stepHeader,section.firstChild);
-  }
 }
-
 function fillSelect(el,items){const previous=el.value;el.innerHTML='<option value="">Selecione</option>'+items.map(x=>'<option>'+x+'</option>').join("");if(items.includes(previous))el.value=previous}
 function configureSegment(){
   renderCategoryQuestions();
@@ -416,11 +377,14 @@ document.getElementById("form").addEventListener("submit",async e=>{
     duracao_servico:document.getElementById("duracaoServico").value||null,
     diferenciais:document.getElementById("diferenciais").value.trim()||null,
     informacoes_adicionais:document.getElementById("informacoesAdicionais").value.trim()||null,
-    como_deseja_aparecer:checked("aparicao_video_"),
-    o_que_incluir:checked("incluir_video_"),
+    hora_captacao:document.getElementById("horaCaptacao")?.value||null,
+    autorizacao_voo:document.querySelector('input[name="autorizacaoVoo"]:checked')?.value||null,
+    duracao_videos:document.getElementById("duracaoVideo")?.value||null,
+    como_deseja_aparecer:document.querySelector('input[name="aparicao_video"]:checked')?.value||checked("aparicao_video_"),
+    o_que_incluir:checked("incluir_video_").length?checked("incluir_video_"):checked("incluir_video_"),
     imagens_aereas:checked("imagens_aereas_"),
     itens_mostrar:document.getElementById("itensMostrar").value.trim()||null,
-    formatos:checked("formato_"),
+    formatos:document.querySelector('input[name="formatos"]:checked')?.value?[document.querySelector('input[name="formatos"]:checked').value]:checked("formato_"),
     objetivos_video:checked("obj_"),
     restricoes:document.getElementById("restricoes").value.trim()||null,
     prazo_entrega:document.getElementById("prazoEntrega").value||null,
