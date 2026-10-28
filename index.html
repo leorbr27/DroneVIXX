@@ -208,7 +208,7 @@ function renderCategoryQuestions(){
   if(purpose===renderedCategoryPurpose)return;
   renderedCategoryPurpose=purpose;
   const host=document.getElementById("categoryQuestions");
-  if(purpose==="Imóveis e empreendimentos"){
+  if(purpose==="Imóveis e empreendimentos" && document.querySelector('input[name="finalidade"]:checked')){
     const section=host.closest("section");
     const step3=document.querySelector("[data-segment-briefing]");
     const actions2=section.querySelector(".actions");
@@ -288,14 +288,14 @@ function configureSegment(){
   document.getElementById("segmentHelp").textContent=purpose==="Imóveis e empreendimentos"?"":cfg.help;
   document.getElementById("segmentHelp").style.display=purpose==="Imóveis e empreendimentos"?"none":"";
   document.getElementById("durationLabel").textContent=purpose==="Imóveis e empreendimentos"?"Duração desejada dos vídeos":cfg.durationLabel;
-  document.getElementById("showLabel").textContent=cfg.showLabel;
+  if(document.getElementById("showLabel"))document.getElementById("showLabel").textContent=cfg.showLabel;
   if(purpose!=="Imóveis e empreendimentos"){
     fillSelect(document.getElementById("segmentType"),cfg.types);
     fillSelect(document.getElementById("serviceGoal"),cfg.goals);
     fillSelect(document.getElementById("duracaoServico"),cfg.durations);
   }
   const opts=document.getElementById("objectiveOptions");
-  opts.innerHTML=cfg.objectives.map((x,i)=>'<div class="option"><input type="checkbox" id="obj_'+i+'" value="'+x.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><label for="obj_'+i+'">'+x+'</label></div>').join("");
+  if(opts)opts.innerHTML=cfg.objectives.map((x,i)=>'<div class="option"><input type="checkbox" id="obj_'+i+'" value="'+x.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><label for="obj_'+i+'">'+x+'</label></div>').join("");
   const isRealEstate=purpose==="Imóveis e empreendimentos";
   steps=allSteps.filter(s=>!s.dataset.customPackage||!isRealEstate).filter(s=>!s.dataset.realEstateOnly||isRealEstate);
   if(current>=steps.length)current=steps.length-1;
