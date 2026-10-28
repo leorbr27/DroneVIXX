@@ -288,9 +288,11 @@ function configureSegment(){
     document.getElementById("goalLabel").innerHTML=cfg.goalLabel+' <span class="required">*</span>';
   }
   document.querySelector("[data-segment-details] .step-title").textContent=purpose==="Imóveis e empreendimentos"?"Dados do imóvel":"2. Sobre o serviço";
-  document.getElementById("segmentHelp").textContent=purpose==="Imóveis e empreendimentos"?"":cfg.help;
-  document.getElementById("segmentHelp").style.display=purpose==="Imóveis e empreendimentos"?"none":"";
-  document.getElementById("durationLabel").textContent=purpose==="Imóveis e empreendimentos"?"Duração desejada dos vídeos":cfg.durationLabel;
+  if(document.getElementById("segmentHelp")){
+    document.getElementById("segmentHelp").textContent=purpose==="Imóveis e empreendimentos"?"":cfg.help;
+    document.getElementById("segmentHelp").style.display=purpose==="Imóveis e empreendimentos"?"none":"";
+  }
+  if(document.getElementById("durationLabel"))document.getElementById("durationLabel").textContent=purpose==="Imóveis e empreendimentos"?"Duração desejada dos vídeos":cfg.durationLabel;
   if(document.getElementById("showLabel"))document.getElementById("showLabel").textContent=cfg.showLabel;
   if(purpose!=="Imóveis e empreendimentos"){
     fillSelect(document.getElementById("segmentType"),cfg.types);
