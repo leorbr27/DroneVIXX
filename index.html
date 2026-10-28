@@ -280,16 +280,20 @@ function configureSegment(){
   renderCategoryQuestions();
   const purpose=document.querySelector('input[name="finalidade"]:checked')?.value||"Imóveis e empreendimentos";
   const cfg=segmentConfig[purpose]||segmentConfig["Imóveis e empreendimentos"];
-  document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
-  document.getElementById("goalLabel").innerHTML=(purpose==="Imóveis e empreendimentos"?"Finalidade":cfg.goalLabel)+' <span class="required">*</span>';
+  if(purpose!=="Imóveis e empreendimentos"){
+    document.getElementById("segmentTypeLabel").innerHTML=cfg.typeLabel+' <span class="required">*</span>';
+    document.getElementById("goalLabel").innerHTML=cfg.goalLabel+' <span class="required">*</span>';
+  }
   document.querySelector("[data-segment-details] .step-title").textContent=purpose==="Imóveis e empreendimentos"?"Dados do imóvel":"2. Sobre o serviço";
   document.getElementById("segmentHelp").textContent=purpose==="Imóveis e empreendimentos"?"":cfg.help;
   document.getElementById("segmentHelp").style.display=purpose==="Imóveis e empreendimentos"?"none":"";
   document.getElementById("durationLabel").textContent=purpose==="Imóveis e empreendimentos"?"Duração desejada dos vídeos":cfg.durationLabel;
   document.getElementById("showLabel").textContent=cfg.showLabel;
-  fillSelect(document.getElementById("segmentType"),cfg.types);
-  fillSelect(document.getElementById("serviceGoal"),cfg.goals);
-  fillSelect(document.getElementById("duracaoServico"),cfg.durations);
+  if(purpose!=="Imóveis e empreendimentos"){
+    fillSelect(document.getElementById("segmentType"),cfg.types);
+    fillSelect(document.getElementById("serviceGoal"),cfg.goals);
+    fillSelect(document.getElementById("duracaoServico"),cfg.durations);
+  }
   const opts=document.getElementById("objectiveOptions");
   opts.innerHTML=cfg.objectives.map((x,i)=>'<div class="option"><input type="checkbox" id="obj_'+i+'" value="'+x.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"><label for="obj_'+i+'">'+x+'</label></div>').join("");
   const isRealEstate=purpose==="Imóveis e empreendimentos";
